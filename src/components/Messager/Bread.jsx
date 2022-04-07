@@ -1,19 +1,20 @@
-import React from "react";
+import React, {useState} from "react";
 
 const Bread = (props) => {
 
 
-
     return  <>
-            <div className="bread">
-                <input type="radio" name="radio" id="bread_1" value="Белый"/>
-                <label htmlFor="bread_1">Bread_1</label>
-                <br/>
-                <input type="radio" name="radio" id="bread_2" value="Серый"/>
-                <label htmlFor="bread_2">Bread_2</label>
-            </div>
-            <button onClick={ props.plus }>ПЛЮС</button>
-            <button onClick={ props.minus }>МИНУС</button>
+        <div className="bread">
+            <input className="bread__input" type="radio" name="radio" id="bread_1" value="40" onChange={ props.radio } />
+            <label className="bread__label" htmlFor="bread_1">Большая Булка</label>
+            <br/>
+            <input className="bread__input" type="radio" name="radio" id="bread_2" value="20" onChange={ props.radio }/>
+            <label className="bread__label" htmlFor="bread_2">Маленькая Булка</label>
+        </div>
+        <div className="bread__box">
+            <button className="bread__btn" onClick={ props.minus }>МИНУС</button>
+            <button className="bread__btn" onClick={ props.plus }>ПЛЮС</button>
+        </div>
             </>
 };
 

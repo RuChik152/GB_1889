@@ -1,15 +1,20 @@
-import React from "react";
+import React, {useState} from "react";
 
 const Sauce = (props) => {
 
-    return  <>
-                <input type="radio" name="sauce" id="11"/>
-                <label htmlFor="11" name="sauce">1</label>
-                <input type="radio" name="sauce" id="22"/>
-                <label htmlFor="22" name="sauce">2</label>
-                <input type="radio" name="sauce" id="33"/>
-                <label htmlFor="33" name="sauce">3</label>
-            </>
+    const action = (e) => {
+        props.checkbox(e.target);
+        e.target.classList.toggle('label__active')
+    }
+
+    return  <div className="sauce">
+        <input className="sauce__input" type="checkbox" name="sauce" id="checkbox_1"  value="20"/>
+        <label className="sauce__label" htmlFor="checkbox_1" name="sauce" data-id="checkbox_1" data-price="20" onClick={ action } >Кетчуп</label>
+        <input className="sauce__input" type="checkbox" name="sauce" id="checkbox_2"  value="40"/>
+        <label className="sauce__label" htmlFor="checkbox_2" name="sauce" data-id="checkbox_2" data-price="40" onClick={ action }>Маионез</label>
+        <input className="sauce__input" type="checkbox" name="sauce" id="checkbox_3"  value="60"/>
+        <label className="sauce__label" htmlFor="checkbox_3" name="sauce" data-id="checkbox_3" data-price="60" onClick={ action }>Брусничный</label>
+    </div>
 }
 
 export {

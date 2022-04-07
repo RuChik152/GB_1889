@@ -8,4 +8,62 @@
   .main__title {
     text-align: center;
   }
+  .bread {
+    justify-content: center;
+    display: flex;
+    margin: 6px 0px;
+    .bread__input {
+      display: none;
+    }
+    .bread__label {
+      background-color: #cb9292;
+      padding: 1%;
+      margin: 0px 7px;
+      font-size: 19px;
+      cursor: pointer;
+      &:hover {
+        background-color: #be6f6f
+      }
+    }
+  }
 }
+
+.bread__box {
+  display: flex;
+  justify-content: center;
+  margin: 6px 0px;
+  .bread__btn {
+    background-color: #cb9292;
+    padding: 1%;
+    margin: 0px 7px;
+    font-size: 19px;
+    cursor: pointer;
+    border: none;
+    &:hover {
+      background-color: #be6f6f
+    }
+  }
+}
+
+.sauce {
+  display: flex;
+  justify-content: center;
+  .sauce__input{
+    display: none;
+  }
+  .sauce__label{
+    background-color: #cb9292;
+    padding: 1%;
+    margin: 0px 7px;
+    font-size: 19px;
+    cursor: pointer;
+    &:hover {
+      background-color: #be6f6f;
+    }
+  }
+  .label__active{
+    background-color: #af3737;
+    box-shadow: 0px 0px 7px 5px rgba(0, 0, 0, 0.23);
+  }
+}
+
