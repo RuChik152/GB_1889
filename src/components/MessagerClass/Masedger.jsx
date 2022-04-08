@@ -31,6 +31,7 @@ class Masedger extends Component {
         this.setState({bread: e.target.value});
     }
 
+
     checkboxChange = (e) => {
         let obj2 = Object.assign({}, {id: e.dataset.id, price: e.dataset.price})
         let check = this.state.sumSauce.findIndex( (item) => item.id == obj2.id)
@@ -43,25 +44,6 @@ class Masedger extends Component {
             let newArr = arr.filter( (item) => item.id != obj2.id );
             this.setState({ sumSauce: [...newArr] });
         }
-
-        // let chk = e.target.checked;
-        //
-        // if( chk == true ){
-        //     let obj = Object.assign({}, {id: e.target.id, price: e.target.value})
-        //     this.setState({sumSauce: [...this.state.sumSauce, obj]});
-        //
-        // } else {
-        //     let id = e.target.id;
-        //     /* Почему то, если пататься удалить через splice, удаляеться не то, что нужно */
-        //     // let idx = sumSauce.findIndex( (item) => item.id == id);
-        //     // setSumSauce(sumSauce.splice(idx, 1));
-        //
-        //     /* А если так, то работает */
-        //     let arr = this.state.sumSauce;
-        //     this.setState({ sumSauce: []});
-        //     let newArr = arr.filter( (item) => item.id != id );
-        //     this.setState({ sumSauce: [...newArr] });
-        // }
 
     }
 

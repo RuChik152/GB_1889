@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 
-const Sauce = (props) => {
+export const Sauce = (props) => {
 
     const action = (e) => {
         props.checkbox(e.target);
@@ -17,6 +17,3 @@ const Sauce = (props) => {
     </div>
 }
 
-export {
-    Sauce
-}

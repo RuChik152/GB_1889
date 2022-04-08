@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {Bread} from "./Bread";
 import {Sauce} from "./ Sauce";
 
-const Masedger = ( props ) => {
+export const Masedger = ( props ) => {
 
 
     const [count, setCount] = useState(0);
@@ -30,24 +30,24 @@ const Masedger = ( props ) => {
     }
 
     const checkboxChange = (e) => {
-        let obj2 = Object.assign({}, {id: e.dataset.id, price: e.dataset.price})
-        let check = sumSauce.findIndex( (item) => item.id == obj2.id)
+        let obj = { id: e.dataset.id, price: e.dataset.price }
+        let check = sumSauce.findIndex( (item) => item.id == obj.id)
         if(check == -1){
-            setSumSauce([...sumSauce, obj2]);
+            setSumSauce([...sumSauce, obj]);
         } else {
             let arr = sumSauce;
             setSumSauce([]);
-            let newArr = arr.filter( (item) => item.id != obj2.id );
+            let newArr = arr.filter( (item) => item.id != obj.id );
             setSumSauce([...newArr]);
         }
     }
 
     const total = () => {
-        let totalCutlet = cutlet;
-        let totalBread = bread;
+        let totalCutlet = +cutlet;
+        let totalBread = +bread;
         let totalPrice = +sumSauce.reduce( (accumulator, currentValue) => Number(accumulator) + Number(currentValue.price),  0)
 
-        return Number(totalCutlet) + Number(totalBread) + Number(totalPrice);
+        return totalCutlet + totalBread + totalPrice;
     }
 
 
@@ -63,6 +63,3 @@ const Masedger = ( props ) => {
 
 };
 
-export {
-    Masedger
-};
