@@ -8,31 +8,29 @@ export class Reactogram extends Component {
     state = {
         text: '',
         author: '',
-        activate: false,
+        activate: true,
         time: '',
         msg: []
     }
 
     componentDidMount() {
         console.log( `Состояние активатора бота на момент монтирования ${ this.state.activate }` );
-        setTimeout( this.bot, 1500 );
+        // setTimeout( this.bot, 1500 );
     }
 
-    // shouldComponentUpdate( nextProps, nextState ) {
-    //     console.log('22',nextState.activate)
-    //     console.log('33',this.state.activate)
-    //     // if ( nextState.activate != this.state.activate ){
-    //     //      setTimeout( this.bot, 1500 );
-    //     //     return true
-    //     // } else {
-    //     //     return false
-    //     // }
-    //     if(nextState.activate !== this.state.activate && nextState.msg != this.state.msg){
-    //         return true
-    //     } else {
-    //         return false
-    //     }
-    // }
+    shouldComponentUpdate( nextProps, nextState) {
+        console.log('chek',nextProps)
+        if(nextState.activate != this.state.activate){
+            if(nextState.msg != this.state.message){
+                setTimeout( this.bot, 1500 );
+                return true
+            }
+            return false
+        }else {
+            return false
+        }
+    }
+
 
     handelChange = ( e ) => {
         let tag = e.target;
@@ -63,6 +61,7 @@ export class Reactogram extends Component {
     }
 
     bot = () => {
+        // this.setState({activate: true});
         let lengthMsg = this.state.msg.length;
         if ( lengthMsg === 0 ) {
             let obj = {
@@ -75,7 +74,7 @@ export class Reactogram extends Component {
             // this.setState( { time: '' } );
             // this.setState( { text: '' } );
             // this.setState( { author: '' } );
-        } else if( this.state.text === '#Слово' ) {
+        } else if ( this.state.text === '#Слово' ) {
             let obj = {
                 msg: <>
                     <li><a href = "https://slovardalja.net/" target = "_blank">Словарь Даля</a></li>
@@ -135,11 +134,12 @@ export class Reactogram extends Component {
             // this.setState( { text: '' } );
             // this.setState( { author: '' } );
         }
+        this.setState({activate: false});
     }
 
     render() {
         return <>
-            <Chat message = { this.state.msg } />
+            <Chat message = { this.state.msg } bot={ this.bot } activate={ this.state.activate }/>
             <Input click = { this.actionClick } text = { this.state.text } author = { this.state.author } change = { this.handelChange } />
         </>
     }

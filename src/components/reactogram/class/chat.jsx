@@ -4,13 +4,28 @@ import { Msg } from "./msg";
 export class Chat extends Component {
     constructor(props) {
         super(props);
-        this.state = null
     }
 
-    shouldComponentUpdate( nextProps, nextState) {
-        console.log(nextProps.msg);
-        return true
-    }
+    // componentDidMount() {
+    //     setTimeout( this.props.bot, 1500 );
+    // }
+
+    // shouldComponentUpdate( nextProps, nextState) {
+    //     console.log('chek',nextProps)
+    //
+    //     if(nextProps.activate != this.props.activate){
+    //         if(nextProps.msg != this.props.message){
+    //             setTimeout( this.props.bot, 1500 );
+    //             return true
+    //         }
+    //         return false
+    //     }else {
+    //         return false
+    //     }
+    //
+    // }
+
+
 
     reversArr = () => {
         let arr = [ ...this.props.message ];
