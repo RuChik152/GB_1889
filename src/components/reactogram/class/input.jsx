@@ -1,6 +1,6 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 
-export class Input extends Component {
+export class Input extends PureComponent {
 
     action = () => {
         this.props.click();

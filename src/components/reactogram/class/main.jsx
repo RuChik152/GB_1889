@@ -13,25 +13,6 @@ export class Reactogram extends Component {
         msg: []
     }
 
-    componentDidMount() {
-        console.log( `Состояние активатора бота на момент монтирования ${ this.state.activate }` );
-        // setTimeout( this.bot, 1500 );
-    }
-
-    shouldComponentUpdate( nextProps, nextState) {
-        console.log('chek',nextProps)
-        if(nextState.activate != this.state.activate){
-            if(nextState.msg != this.state.message){
-                setTimeout( this.bot, 1500 );
-                return true
-            }
-            return false
-        }else {
-            return false
-        }
-    }
-
-
     handelChange = ( e ) => {
         let tag = e.target;
         if ( tag.className === 'text__input' ) {
@@ -45,7 +26,7 @@ export class Reactogram extends Component {
     actionClick = () => {
         let obj = { msg: this.state.text, author: this.state.author, time: this.state.time };
         this.setState( { msg: [ ...this.state.msg, obj ] } );
-        this.setState( { activate: true } );
+        this.setState( { activate: !this.state.activate } );
     }
 
     createCurrentTime = () => {
@@ -61,7 +42,6 @@ export class Reactogram extends Component {
     }
 
     bot = () => {
-        // this.setState({activate: true});
         let lengthMsg = this.state.msg.length;
         if ( lengthMsg === 0 ) {
             let obj = {
@@ -70,10 +50,6 @@ export class Reactogram extends Component {
                 time: `${ this.createCurrentTime() }`
             };
             this.updateState( obj );
-            // this.setState( { msg: [ ...this.state.msg, obj ] } );
-            // this.setState( { time: '' } );
-            // this.setState( { text: '' } );
-            // this.setState( { author: '' } );
         } else if ( this.state.text === '#Слово' ) {
             let obj = {
                 msg: <>
@@ -84,10 +60,6 @@ export class Reactogram extends Component {
                 time: `${ this.createCurrentTime() }`
             };
             this.updateState( obj );
-            // this.setState( { msg: [ ...this.state.msg, obj ] } );
-            // this.setState( { time: '' } );
-            // this.setState( { text: '' } );
-            // this.setState( { author: '' } );
         } else if ( this.state.text === '#Время' ) {
             let obj = {
                 msg: <>
@@ -98,10 +70,6 @@ export class Reactogram extends Component {
                 time: `${ this.createCurrentTime() }`
             };
             this.updateState( obj );
-            // this.setState( { msg: [ ...this.state.msg, obj ] } );
-            // this.setState( { time: '' } );
-            // this.setState( { text: '' } );
-            // this.setState( { author: '' } );
         } else if ( this.state.text === '#Поиск' ) {
             let obj = {
                 msg: <>
@@ -113,10 +81,6 @@ export class Reactogram extends Component {
                 time: `${ this.createCurrentTime() }`
             };
             this.updateState( obj );
-            // this.setState( { msg: [ ...this.state.msg, obj ] } );
-            // this.setState( { time: '' } );
-            // this.setState( { text: '' } );
-            // this.setState( { author: '' } );
         } else {
             let name = this.state.msg.slice( -1 );
             const msgBot = [ 'Сообщение от пользователя', 'Message from user(англ.)', 'Message de l\'utilisateur(франц.)', 'Nachricht vom Benutzer(немц.)', '\n' +
@@ -129,17 +93,12 @@ export class Reactogram extends Component {
             newStr = newStr.replace( regWel, name[ 0 ].author );
             let obj = { msg: `${ newStr }`, author: 'BothFather', time: `${ this.createCurrentTime() }` };
             this.updateState( obj );
-            // this.setState( { msg: [ ...this.state.msg, obj ] } );
-            // this.setState( { time: '' } );
-            // this.setState( { text: '' } );
-            // this.setState( { author: '' } );
         }
-        this.setState({activate: false});
     }
 
     render() {
         return <>
-            <Chat message = { this.state.msg } bot={ this.bot } activate={ this.state.activate }/>
+            <Chat message = { this.state.msg } bot = { this.bot } activate = { this.state.activate } />
             <Input click = { this.actionClick } text = { this.state.text } author = { this.state.author } change = { this.handelChange } />
         </>
     }

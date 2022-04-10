@@ -2,30 +2,18 @@ import React, { Component } from "react";
 import { Msg } from "./msg";
 
 export class Chat extends Component {
-    constructor(props) {
-        super(props);
+
+    componentDidMount() {
+        setTimeout( this.props.bot, 1500 );
     }
 
-    // componentDidMount() {
-    //     setTimeout( this.props.bot, 1500 );
-    // }
-
-    // shouldComponentUpdate( nextProps, nextState) {
-    //     console.log('chek',nextProps)
-    //
-    //     if(nextProps.activate != this.props.activate){
-    //         if(nextProps.msg != this.props.message){
-    //             setTimeout( this.props.bot, 1500 );
-    //             return true
-    //         }
-    //         return false
-    //     }else {
-    //         return false
-    //     }
-    //
-    // }
-
-
+    shouldComponentUpdate( nextProps, nextState ) {
+        if ( nextProps.activate != this.props.activate ) {
+            setTimeout( this.props.bot, 1500 );
+            return true
+        }
+        return true
+    }
 
     reversArr = () => {
         let arr = [ ...this.props.message ];
