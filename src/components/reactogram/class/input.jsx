@@ -7,12 +7,11 @@ export class Input extends PureComponent {
     }
 
     render() {
-        return  <div className = "text">
-            <input className = "text__input" value={ this.props.text } onChange={ this.props.change } type = "text" placeholder="Ваше сообщение" name="msg"/>
-            <br/>
-            <input className = "text__name" value={ this.props.author } onChange={ this.props.change } type = "text" placeholder="Ваше имя" name="author"/>
-            <br/>
-            <button className = "text__btn" onClick={ this.action }>Отправить</button>
+        return <div className = "text">
+            <input className = "text__input" value = { this.props.text } onChange = { this.props.change } type = "text" placeholder = "Ваше сообщение" name = "msg" />
+            <br />
+
+            <button className = "text__btn" onClick = { this.action }>Отправить</button>
         </div>
     }
 

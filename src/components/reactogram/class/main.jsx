@@ -13,12 +13,14 @@ export class Reactogram extends Component {
         msg: []
     }
 
+    componentDidMount() {
+        this.setState( { author: this.props.data } );
+    }
+
     handelChange = ( e ) => {
         let tag = e.target;
         if ( tag.className === 'text__input' ) {
             this.setState( { text: tag.value } );
-        } else if ( tag.className === 'text__name' ) {
-            this.setState( { author: tag.value } );
         }
         this.setState( { time: this.createCurrentTime() } );
     }
@@ -38,14 +40,13 @@ export class Reactogram extends Component {
         this.setState( { msg: [ ...this.state.msg, obj ] } );
         this.setState( { time: '' } );
         this.setState( { text: '' } );
-        this.setState( { author: '' } );
     }
 
     bot = () => {
         let lengthMsg = this.state.msg.length;
         if ( lengthMsg === 0 ) {
             let obj = {
-                msg: 'Привет, это бот психологической помощи Вася Вася. Вы можете использовать команды для взаимодействия с ним =>  #Слово #Время #Поиск',
+                msg: 'Привет, это бот психологической помощи Вася Вася. Вы можете использовать кодовые фразы для взаимодействия с ним =>  #Слово #Время #Поиск',
                 author: 'BothFather',
                 time: `${ this.createCurrentTime() }`
             };

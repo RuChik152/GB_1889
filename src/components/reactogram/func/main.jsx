@@ -3,7 +3,7 @@ import { Chat } from "./chat";
 import { Input } from "./input";
 
 
-export const Reactogram = () => {
+export const Reactogram = ( props ) => {
 
     const [ text, setText ] = useState( '' );
     const [ author, setAuthor ] = useState( '' );
@@ -11,21 +11,14 @@ export const Reactogram = () => {
     const [ time, setTime ] = useState( '' );
     const [ msg, setMsg ] = useState( [] );
 
-
     useEffect( () => {
-        console.log( `Состояние активатора бота на момент монтирования ${ activate }` );
-        setTimeout( bot, 1500 );
-        return () => {
-            setActivate( false );
-        }
-    }, [ activate ] );
+        setAuthor( props.data );
+    }, [ author ] )
 
     const handelChange = ( e ) => {
         let tag = e.target;
         if ( tag.className === 'text__input' ) {
             setText( tag.value );
-        } else if ( tag.className === 'text__name' ) {
-            setAuthor( tag.value );
         }
         setTime( createCurrentTime() );
     }
@@ -45,7 +38,7 @@ export const Reactogram = () => {
         let lengthMsg = msg.length;
         if ( lengthMsg === 0 ) {
             let obj = {
-                msg: 'Привет, это бот психологической помощи Вася Вася. Вы можете использовать команды для взаимодействия с ним =>  #Слово #Время #Поиск',
+                msg: 'Привет, это бот психологической помощи Вася Вася. Вы можете использовать кодовые фразы для взаимодействия с ним =>  #Слово #Время #Поиск',
                 author: 'BothFather',
                 time: `${ createCurrentTime() }`
             };
@@ -116,7 +109,7 @@ export const Reactogram = () => {
     }
 
     return <>
-        <Chat message = { msg } />
+        <Chat message = { msg } bot = { bot } setActive = { setActivate } activate = { activate } />
         <Input click = { actionClick } text = { text } author = { author } change = { handelChange } />
     </>
 }
