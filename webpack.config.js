@@ -25,6 +25,13 @@ module.exports = {
             {
                 test: /\.scss$/i,
                 use: [miniCss.loader, "css-loader", "sass-loader"]
+            },
+            {
+                test: /\.(jpg|png|svg)$/,
+                loader: "file-loader",
+                options: {
+                    name: 'url-loader'
+                }
             }
         ]
     },

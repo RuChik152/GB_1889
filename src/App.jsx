@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import './scss/style.scss';
-//import { Reactogram } from "./components/reactogram/func/main";
-import { Reactogram } from "./components/reactogram/class/main";
+import { Reactogram } from "./components/reactogram/func/main";
+//import { Reactogram } from "./components/reactogram/class/main";
 import { Question } from "./components/reactogram/class/question";
 
 const App = () => {
