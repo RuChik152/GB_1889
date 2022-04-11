@@ -160,7 +160,7 @@ export class Reactogram extends Component {
 
   render() {
     return (
-      <>
+      <div className="home">
         <Chat
           message={this.state.msg}
           bot={this.bot}
@@ -172,7 +172,7 @@ export class Reactogram extends Component {
           author={this.state.author}
           change={this.handelChange}
         />
-      </>
+      </div>
     );
   }
 }

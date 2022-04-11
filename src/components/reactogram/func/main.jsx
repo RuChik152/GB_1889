@@ -164,7 +164,7 @@ export const Reactogram = (props) => {
   };
 
   return (
-    <>
+    <div className="home">
       <Chat
         message={msg}
         bot={bot}
@@ -177,6 +177,6 @@ export const Reactogram = (props) => {
         author={author}
         change={handelChange}
       />
-    </>
+    </div>
   );
 };
