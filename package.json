@@ -6,7 +6,7 @@
   "scripts": {
     "start": "webpack serve --mode=development",
     "build": "webpack --mode=production",
-    "lint": "npx eslint ./src --ext .js,.jsx",
+    "lint": "npx eslint ./src --ext .js,.jsx --fix",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
@@ -26,6 +26,7 @@
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jest": "^26.1.4",
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.29.4",
@@ -33,6 +34,7 @@
     "file-loader": "^6.2.0",
     "gh-pages": "^3.2.3",
     "html-webpack-plugin": "^5.5.0",
+    "jest": "^27.5.1",
     "mini-css-extract-plugin": "^2.6.0",
     "prettier": "^2.6.2",
     "url-loader": "^4.1.1",
