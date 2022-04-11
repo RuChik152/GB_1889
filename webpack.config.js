@@ -1,16 +1,16 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const miniCss = require("mini-css-extract-plugin");
+const path = require( 'path' );
+const HtmlWebpackPlugin = require( 'html-webpack-plugin' );
+const miniCss = require( "mini-css-extract-plugin" );
 
 module.exports = {
-    entry: path.resolve(__dirname, './src/index.jsx'),
+    entry: path.resolve( __dirname, './src/index.jsx' ),
     output: {
         filename: "main.js",
-        path: path.resolve(__dirname, './build'),
+        path: path.resolve( __dirname, './build' ),
     },
 
     resolve: {
-        extensions: ['.jsx', '.js', '.scss']
+        extensions: [ '.jsx', '.js', '.scss', '.jpg', '.png', '.svg' ]
     },
 
     devtool: 'eval-source-map',
@@ -20,29 +20,26 @@ module.exports = {
             {
                 test: /\.jsx?$/,
                 exclude: /node_modules/,
-                use: ['babel-loader'],
+                use: [ 'babel-loader' ],
             },
             {
                 test: /\.scss$/i,
-                use: [miniCss.loader, "css-loader", "sass-loader"]
+                use: [ miniCss.loader, "css-loader", "sass-loader" ]
             },
             {
-                test: /\.(jpg|png|svg)$/,
-                loader: "file-loader",
-                options: {
-                    name: 'url-loader'
-                }
+                test: /\.(png|svg|jpg|jpeg|gif)$/i,
+                use: ['file-loader'],
             }
         ]
     },
 
     plugins: [
-        new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, './public/index.html'),
+        new HtmlWebpackPlugin( {
+            template: path.resolve( __dirname, './public/index.html' ),
             filename: 'index.html'
-        }),
-        new miniCss({
+        } ),
+        new miniCss( {
             filename: 'style.css',
-        })
+        } )
     ]
 }
