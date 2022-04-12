@@ -4,14 +4,25 @@ import { Input } from './input';
 
 export const Reactogram = (props) => {
   const [text, setText] = useState('');
-  const [author, setAuthor] = useState('');
-  const [activate, setActivate] = useState(false);
   const [time, setTime] = useState('');
   const [msg, setMsg] = useState([]);
 
   useEffect(() => {
-    setAuthor(props.data);
-  }, [author]);
+    setTimeout(bot, 1500);
+    //eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (msg.length !== 0) {
+      if (msg[msg.length - 1].author !== 'BothFather') {
+        const timeout = setTimeout(bot, 1500);
+        return () => {
+          clearTimeout(timeout);
+        };
+      }
+    }
+    //eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [msg]);
 
   const handelChange = (e) => {
     let tag = e.target;
@@ -22,9 +33,8 @@ export const Reactogram = (props) => {
   };
 
   const actionClick = () => {
-    let obj = { msg: text, author: author, time: time };
+    let obj = { msg: text, author: props.data, time: time };
     setMsg([...msg, obj]);
-    setActivate(true);
   };
 
   const createCurrentTime = () => {
@@ -43,7 +53,6 @@ export const Reactogram = (props) => {
       setMsg([...msg, obj]);
       setTime('');
       setText('');
-      setAuthor('');
     }
 
     if (text === '#Слово') {
@@ -76,7 +85,6 @@ export const Reactogram = (props) => {
       setMsg([...msg, obj]);
       setTime('');
       setText('');
-      setAuthor('');
     } else if (text === '#Время') {
       let obj = {
         msg: (
@@ -99,7 +107,6 @@ export const Reactogram = (props) => {
       setMsg([...msg, obj]);
       setTime('');
       setText('');
-      setAuthor('');
     } else if (text === '#Поиск') {
       let obj = {
         msg: (
@@ -135,13 +142,11 @@ export const Reactogram = (props) => {
       setMsg([...msg, obj]);
       setTime('');
       setText('');
-      setAuthor('');
     } else {
       let name = msg.slice(-1);
       const msgBot = [
         'Сообщение от пользователя',
         'Message from user(англ.)',
-        "Message de l'utilisateur(франц.)",
         'Nachricht vom Benutzer(немц.)',
         '\n' + '用戶留言(кит.)',
       ];
@@ -153,28 +158,22 @@ export const Reactogram = (props) => {
       newStr = newStr.replace(regWel, name[0].author);
       let obj = {
         msg: `${newStr}`,
-        author: 'Бот Вася',
+        author: 'BothFather',
         time: `${createCurrentTime()}`,
       };
       setMsg([...msg, obj]);
       setTime('');
       setText('');
-      setAuthor('');
     }
   };
 
   return (
     <div className="home">
-      <Chat
-        message={msg}
-        bot={bot}
-        setActive={setActivate}
-        activate={activate}
-      />
+      <Chat message={msg} />
       <Input
         click={actionClick}
         text={text}
-        author={author}
+        author={props.data}
         change={handelChange}
       />
     </div>

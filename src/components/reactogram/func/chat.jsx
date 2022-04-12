@@ -1,16 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Msg } from './msg';
 
-export const Chat = (props) => {
-  useEffect(() => {
-    setTimeout(props.bot, 1500);
-    return () => {
-      props.setActive(false);
-    };
-  }, [props.activate]);
-
+export const Chat = ({ message }) => {
   const reversArr = () => {
-    let arr = [...props.message];
+    let arr = [...message];
     return arr.reverse();
   };
 

@@ -6,6 +6,10 @@ export class Chat extends Component {
     setTimeout(this.props.bot, 1500);
   }
 
+  componentWillUnmount() {
+    clearTimeout(this.props.bot);
+  }
+
   shouldComponentUpdate(nextProps) {
     if (nextProps.activate != this.props.activate) {
       setTimeout(this.props.bot, 1500);

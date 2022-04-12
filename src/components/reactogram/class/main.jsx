@@ -45,6 +45,7 @@ export class Reactogram extends Component {
   };
 
   bot = () => {
+    console.log('11');
     let lengthMsg = this.state.msg.length;
     if (lengthMsg === 0) {
       let obj = {
@@ -139,7 +140,7 @@ export class Reactogram extends Component {
       const msgBot = [
         'Сообщение от пользователя',
         'Message from user(англ.)',
-        'Message de l\'utilisateur(франц.)',
+        'Message de lutilisateur(франц.)',
         'Nachricht vom Benutzer(немц.)',
         '\n' + '用戶留言(кит.)',
       ];
