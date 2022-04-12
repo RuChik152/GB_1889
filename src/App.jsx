@@ -1,20 +1,27 @@
-import React, {useState} from "react";
-import './App.css';
-import './my_style.scss';
-import { Form } from "./components/FormFunc/Form";
-import { Masedger } from "./components/Messager/Masedger";
-//import { Masedger } from "./components/MessagerClass/Masedger";
+import React, { useState, useCallback } from 'react';
+import './scss/style.scss';
+import { Reactogram } from './components/reactogram/func/main';
+//import { Reactogram } from "./components/reactogram/class/main";
+import { Question } from './components/reactogram/class/question';
 
-const App = () => {
-    const [title, setTitle] = useState('Домашняя работа №1');
-    const [coffe_name, setCoffeName] = useState('Бургер Усталого студента');
-    return  <>
-                <Form />
-        <hr/>
-                <Masedger name={ title } burger_name={ coffe_name }/>
-            </>
-}
+export const App = () => {
+  const [author, setAuthor] = useState('');
+  const [active, setActive] = useState(true);
 
-export {
-    App
+  const changeAuthor = useCallback((e) => {
+    setAuthor(e.target.value);
+  }, []);
+
+  const quest = useCallback(() => {
+    setActive(!active);
+  }, [active]);
+
+  return (
+    <>
+      {active && (
+        <Question author={author} quest={quest} change={changeAuthor} />
+      )}
+      {!active && <Reactogram data={author} />}
+    </>
+  );
 };

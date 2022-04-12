@@ -1,0 +1,18 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+
+html {
+  background: rgb(223,218,218);
+  background: linear-gradient(90deg, rgba(223,218,218,1) 0%, rgba(93,152,195,1) 53%, rgba(216,232,145,1) 100%);
+}
+
+.home {
+  width: 1140px;
+  margin: 3vh auto;
+  background: rgb(167,167,167);
+  background: linear-gradient(90deg, rgba(167,167,167,1) 0%, rgba(72,119,154,1) 53%, rgba(145,156,97,1) 100%);
+  padding: 17px;
+}
