@@ -1,5 +1,5 @@
 import React from 'react';
-import './msg.scss'
+import './msg.scss';
 
 export const Msg = (props) => {
   return (

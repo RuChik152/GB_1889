@@ -1,6 +1,6 @@
 import React from 'react';
 import { Msg } from './Msg/msg';
-import './chat.scss'
+import './chat.scss';
 
 export const Chat = ({ message }) => {
   const reversArr = () => {
