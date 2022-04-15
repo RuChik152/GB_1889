@@ -13,11 +13,12 @@ export class Question extends Component {
             value={this.props.author}
             onChange={this.props.change}
             className="modal__name"
+            placeholder="Ваше Имя"
           />
           <button
             className="modal__btn"
             onClick={this.props.quest}
-            placeholder="Ваше имя"
+            data-testid="quest-data-test"
           >
             Отправить
           </button>

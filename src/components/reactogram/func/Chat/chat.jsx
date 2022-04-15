@@ -1,5 +1,5 @@
 import React from 'react';
-import { Msg } from './msg';
+import { Msg } from './Msg/msg';
 
 export const Chat = ({ message }) => {
   const reversArr = () => {
@@ -8,7 +8,7 @@ export const Chat = ({ message }) => {
   };
 
   return (
-    <div className="chat">
+    <div className="chat" data-testid="chat-test">
       <div className="chat__area">
         {reversArr().map((item, index) => (
           <Msg item={item} key={index} />

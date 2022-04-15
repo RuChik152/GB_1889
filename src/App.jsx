@@ -2,7 +2,7 @@ import React, { useState, useCallback } from 'react';
 import './scss/style.scss';
 import { Reactogram } from './components/reactogram/func/main';
 //import { Reactogram } from "./components/reactogram/class/main";
-import { Question } from './components/reactogram/class/question';
+import { Question } from './components/reactogram/modal/question';
 
 export const App = () => {
   const [author, setAuthor] = useState('');

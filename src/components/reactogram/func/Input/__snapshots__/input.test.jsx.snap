@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Input Snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="text"
+  >
+    <input
+      class="text__input"
+      name="msg"
+      placeholder="Ваше сообщение"
+      type="text"
+      value="text"
+    />
+    <br />
+    <button
+      class="text__btn"
+      data-testid="test-id"
+    >
+      Отправить
+    </button>
+  </div>
+</DocumentFragment>
+`;
