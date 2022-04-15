@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './question.scss'
 
 export class Question extends Component {
   render() {

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Chat } from './Chat/chat';
 import { Input } from './Input/input';
+import './main.scss'
 
 export const Reactogram = ({ data }) => {
   const [text, setText] = useState('');
