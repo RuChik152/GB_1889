@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Chat } from './Chat/chat';
 import { Input } from './Input/input';
 
-export const Reactogram = ({ author }) => {
+export const Reactogram = ({ data }) => {
   const [text, setText] = useState('');
   const [time, setTime] = useState('');
   const [msg, setMsg] = useState([]);
@@ -33,7 +33,7 @@ export const Reactogram = ({ author }) => {
   };
 
   const actionClick = () => {
-    let obj = { msg: text, author: author, time: time };
+    let obj = { msg: text, author: data, time: time };
     setMsg([...msg, obj]);
   };
 
@@ -173,7 +173,7 @@ export const Reactogram = ({ author }) => {
       <Input
         click={actionClick}
         text={text}
-        author={author}
+        author={data}
         change={handelChange}
       />
     </div>
