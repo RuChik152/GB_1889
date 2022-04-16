@@ -1,12 +1,26 @@
-import React, { useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { Chat } from './Chat/chat';
 import { Input } from './Input/input';
 import style from './main.module.scss';
 
-export const Reactogram = ({ data }) => {
+
+interface ReactogramProps {
+  data: string;
+}
+
+interface Msg {
+  author: string,
+  time: string,
+  msg: string
+}
+
+
+export const Reactogram: FC<ReactogramProps> = ({ data }) => {
+
+
   const [text, setText] = useState('');
   const [time, setTime] = useState('');
-  const [msg, setMsg] = useState([]);
+  const [msg, setMsg] = useState<Msg[]>([]);
 
   useEffect(() => {
     setTimeout(bot, 1500);
@@ -25,27 +39,29 @@ export const Reactogram = ({ data }) => {
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [msg]);
 
-  const handelChange = (e) => {
+  const handelChange = (e: { target: { id: string; value: React.SetStateAction<string>; }; }) => {
     if (e.target.id === 'text__input__id') {
       setText(e.target.value);
     }
     setTime(createCurrentTime());
   };
 
+
+
   const actionClick = () => {
-    let obj = { msg: text, author: data, time: time };
+    const obj: { msg: string, author: string, time: string } = { msg: text, author: data, time: time };
     setMsg([...msg, obj]);
   };
 
   const createCurrentTime = () => {
-    let time = new Date();
+    const time = new Date();
     return `${time.getHours()} : ${time.getMinutes()} : ${time.getSeconds()}`;
   };
 
   const bot = () => {
-    let lengthMsg = msg.length;
+    const lengthMsg = msg.length;
     if (lengthMsg === 0) {
-      let obj = {
+      const obj = {
         msg: 'Привет, это бот психологической помощи Вася Вася. Вы можете использовать кодовые фразы для взаимодействия с ним =>  #Слово #Время #Поиск',
         author: 'BothFather',
         time: `${createCurrentTime()}`,
@@ -56,9 +72,8 @@ export const Reactogram = ({ data }) => {
     }
 
     if (text === '#Слово') {
-      let obj = {
-        msg: (
-          <>
+      const obj: Msg = {
+        msg: `<>
             <li>
               <a
                 href="https://slovardalja.net/"
@@ -77,8 +92,7 @@ export const Reactogram = ({ data }) => {
                 Стихи Пушкина
               </a>
             </li>
-          </>
-        ),
+          </>`,
         author: 'BothFather',
         time: `${createCurrentTime()}`,
       };
@@ -86,9 +100,8 @@ export const Reactogram = ({ data }) => {
       setTime('');
       setText('');
     } else if (text === '#Время') {
-      let obj = {
-        msg: (
-          <>
+      const obj = {
+        msg: `<>
             <li>
               <a href="https://time.is/ru/" target="_blank" rel="noreferrer">
                 Time
@@ -99,8 +112,7 @@ export const Reactogram = ({ data }) => {
                 Time 100
               </a>
             </li>
-          </>
-        ),
+          </>`,
         author: 'BothFather',
         time: `${createCurrentTime()}`,
       };
@@ -108,9 +120,8 @@ export const Reactogram = ({ data }) => {
       setTime('');
       setText('');
     } else if (text === '#Поиск') {
-      let obj = {
-        msg: (
-          <>
+      const obj = {
+        msg: `<>
             <li>
               <a href="https://ya.ru/" target="_blank" rel="noreferrer">
                 Time
@@ -134,8 +145,7 @@ export const Reactogram = ({ data }) => {
                 DogPile
               </a>
             </li>
-          </>
-        ),
+          </>`,
         author: 'BothFather',
         time: `${createCurrentTime()}`,
       };
@@ -143,20 +153,20 @@ export const Reactogram = ({ data }) => {
       setTime('');
       setText('');
     } else {
-      let name = msg.slice(-1);
-      const msgBot = [
+      const name = msg.slice(-1);
+      const msgBot: string[] = [
         'Сообщение от пользователя',
         'Message from user(англ.)',
         'Nachricht vom Benutzer(немц.)',
-        '\n' + '用戶留言(кит.)',
+        '用戶留言(кит.)',
       ];
-      let template = '$wel__template$ $nik__name$.';
-      let positionMsgBot = parseInt(Math.random() * msgBot.length);
+      const template = '$wel__template$ $nik__name$.';
+      const positionMsgBot = parseInt(String(Math.random() * msgBot.length));
       let regWel = /\$wel__template\$/gi;
       let newStr = template.replace(regWel, msgBot[positionMsgBot]);
       regWel = /\$nik__name\$/gi;
       newStr = newStr.replace(regWel, name[0].author);
-      let obj = {
+      const obj = {
         msg: `${newStr}`,
         author: 'BothFather',
         time: `${createCurrentTime()}`,
@@ -169,14 +179,8 @@ export const Reactogram = ({ data }) => {
 
   return (
     <div className={style.home} data-testid="home-test-id">
-      {/*<img src = {bg} alt = "" />*/}
       <Chat message={msg} />
-      <Input
-        click={actionClick}
-        text={text}
-        author={data}
-        change={handelChange}
-      />
+      <Input click={actionClick} text={text} change={handelChange} />
     </div>
   );
 };

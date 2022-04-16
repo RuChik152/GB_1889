@@ -1,14 +1,26 @@
-import React from 'react';
+import React, { FC, SetStateAction } from 'react';
 import style from './input.module.scss';
 import { Button as ButtonUI, Input as InputUI } from '@mui/material';
 
-export const Input = ({ text, change, click }) => {
+// interface InputProps {
+//   text: string;
+//   change: () => React.ChangeEvent<HTMLInputElement>;
+//   click: () => void;
+// }
+
+interface Props {
+    click: () => void;
+    text: string;
+    change: (e: { target: { id: string; value: SetStateAction<string>; }; }) => void;
+}
+
+export const Input: FC<Props> = ({ text, change, click }) => {
   return (
     <div className={style.text}>
       <InputUI
         id="text__input__id"
         value={text}
-        onChange={change}
+        onChange={ (e) => change(e)}
         type="text"
         placeholder="Ваше сообщение"
         name="msg"
