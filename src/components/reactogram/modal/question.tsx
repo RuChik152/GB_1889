@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import style from './question.module.scss';
 
 interface QuestionProps {
-    author: boolean,
+    author: string,
     quest: () => void,
     change: () => void
 }
