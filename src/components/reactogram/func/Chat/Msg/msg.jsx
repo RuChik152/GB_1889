@@ -1,16 +1,16 @@
 import React from 'react';
-import './msg.scss';
+import style from './msg.module.scss';
 
 export const Msg = (props) => {
   return (
-    <div className="msg__item">
-      <span className="item__author" data-testid="test-author">
+    <div className={style.msg__item}>
+      <span className={style.item__author} data-testid="test-author">
         {props.item.author}
       </span>
-      <p className="item__text" data-testid="test-text">
+      <p className={style.item__text} data-testid="test-text">
         {props.item.msg}
       </p>
-      <p className="item__time" data-testid="test-time">
+      <p className={style.item__time} data-testid="test-time">
         Время: {props.item.time}
       </p>
     </div>

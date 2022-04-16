@@ -1,6 +1,6 @@
 import React from 'react';
 import { Msg } from './Msg/msg';
-import './chat.scss';
+import style from './chat.module.scss';
 
 export const Chat = ({ message }) => {
   const reversArr = () => {
@@ -9,7 +9,7 @@ export const Chat = ({ message }) => {
   };
 
   return (
-    <div className="chat" data-testid="chat-test">
+    <div className={style.chat} data-testid="chat-test">
       <div className="chat__area">
         {reversArr().map((item, index) => (
           <Msg item={item} key={index} />

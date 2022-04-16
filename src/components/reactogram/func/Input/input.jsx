@@ -1,11 +1,12 @@
 import React from 'react';
-import './input.scss';
+import style from './input.module.scss';
+import { Button as ButtonUI, Input as InputUI } from '@mui/material';
 
 export const Input = ({ text, change, click }) => {
   return (
-    <div className="text">
-      <input
-        className="text__input"
+    <div className={style.text}>
+      <InputUI
+        id="text__input__id"
         value={text}
         onChange={change}
         type="text"
@@ -13,9 +14,9 @@ export const Input = ({ text, change, click }) => {
         name="msg"
       />
       <br />
-      <button className="text__btn" onClick={click} data-testid="test-id">
+      <ButtonUI onClick={click} data-testid="test-id" variant="contained">
         Отправить
-      </button>
+      </ButtonUI>
     </div>
   );
 };

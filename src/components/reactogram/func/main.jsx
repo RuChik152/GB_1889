@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Chat } from './Chat/chat';
 import { Input } from './Input/input';
-import './main.scss';
+import style from './main.module.scss';
 
 export const Reactogram = ({ data }) => {
   const [text, setText] = useState('');
@@ -26,9 +26,8 @@ export const Reactogram = ({ data }) => {
   }, [msg]);
 
   const handelChange = (e) => {
-    let tag = e.target;
-    if (tag.className === 'text__input') {
-      setText(tag.value);
+    if (e.target.id === 'text__input__id') {
+      setText(e.target.value);
     }
     setTime(createCurrentTime());
   };
@@ -169,7 +168,8 @@ export const Reactogram = ({ data }) => {
   };
 
   return (
-    <div className="home" data-testid="home-test-id">
+    <div className={style.home} data-testid="home-test-id">
+      {/*<img src = {bg} alt = "" />*/}
       <Chat message={msg} />
       <Input
         click={actionClick}

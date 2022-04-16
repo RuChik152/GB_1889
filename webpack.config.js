@@ -15,7 +15,7 @@ module.exports = {
     },
 
     resolve: {
-        extensions: [ '.jsx', '.js', '.scss', '.jpg', '.png', '.svg' ]
+        extensions: [ '.jsx', '.js', '.tsx', '.ts','.scss', '.jpg', '.png', '.svg' ]
     },
 
     devtool: 'eval-source-map',
@@ -23,7 +23,7 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.jsx?$/,
+                test: /\.(j|t)sx?$/,
                 exclude: /node_modules/,
                 use: [ 'babel-loader' ],
             },
@@ -62,7 +62,10 @@ module.exports = {
             },
             {
                 test: /\.(png|svg|jpg|jpeg|gif)$/i,
-                use: ['file-loader'],
+                type: 'asset/resource',
+                generator:{
+                    filename: 'static/[hash][ext]',
+                },
             }
         ]
     },
