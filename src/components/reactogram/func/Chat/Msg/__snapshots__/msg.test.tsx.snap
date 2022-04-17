@@ -9,13 +9,13 @@ exports[`Msg Snapshot test 1`] = `
       class="item__author"
       data-testid="test-author"
     >
-      admin
+      Имя Автора
     </span>
     <p
       class="item__text"
       data-testid="test-text"
     >
-      Тестовое сообщение!
+      Какой то текст
     </p>
     <p
       class="item__time"

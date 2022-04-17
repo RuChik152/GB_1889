@@ -11,9 +11,7 @@ const Template = (args) => <Msg {...args} />;
 export const Primary = Template.bind({});
 
 Primary.args = {
-  item: {
     author: 'admin',
     msg: 'Тестовое сообщение №1!',
     time: '10:10:10',
-  },
 };

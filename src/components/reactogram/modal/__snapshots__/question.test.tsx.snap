@@ -15,9 +15,10 @@ exports[`Question Snapshot 1`] = `
       </p>
       <input
         class="modal__name"
+        id="input_test_id"
         placeholder="Ваше Имя"
         type="text"
-        value=""
+        value="test_name"
       />
       <button
         class="modal__btn"

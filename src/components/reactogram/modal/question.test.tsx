@@ -1,16 +1,16 @@
 import React from 'react';
-import { render, waitFor } from '@testing-library/react';
+import { render, waitFor,  screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { Question } from './question';
 import userEvent from '@testing-library/user-event';
 
 describe('Question', () => {
   it('Render', () => {
-    render(<Question />);
+    render(<Question author={'test_name'} quest={jest.fn()} change={jest.fn()} />);
   });
 
   it('Find input field and button', () => {
-    const { getByPlaceholderText, getByRole } = render(<Question />);
+    const { getByPlaceholderText, getByRole } = render(<Question author={'test_name'} quest={jest.fn()} change={jest.fn()} />);
     const inputText = getByPlaceholderText(/Ваше Имя/i);
     const btn = getByRole('button');
     expect(inputText).toBeInTheDocument();
@@ -18,16 +18,14 @@ describe('Question', () => {
   });
 
   it('Text in INPUT', () => {
-    const { getByPlaceholderText } = render(
-      <Question author={'test_name'} quest={jest.fn()} change={jest.fn()} />
-    );
-    const inputText = getByPlaceholderText(/Ваше Имя/i);
-    expect(inputText.value).toMatch(String());
+    render(<Question author={'test_name'} quest={jest.fn()} change={jest.fn()} />);
+    const link = screen.getByPlaceholderText(/Ваше Имя/i);
+    expect(link).toHaveValue('test_name');
   });
 
   it('Click to button', async () => {
     const handelClick = jest.fn();
-    const { getByRole } = render(<Question quest={handelClick} />);
+    const { getByRole } = render(<Question quest={handelClick} author={'test_name'} change={jest.fn()}/>);
     const btn = getByRole('button');
     userEvent.click(btn);
     await waitFor(() => expect(handelClick).toHaveBeenCalledTimes(1), {
@@ -36,7 +34,7 @@ describe('Question', () => {
   });
 
   it('Snapshot', () => {
-    const { asFragment } = render(<Question />);
+    const { asFragment } = render(<Question author={'test_name'} quest={jest.fn()} change={jest.fn()} />);
     expect(asFragment()).toMatchSnapshot();
   });
 });

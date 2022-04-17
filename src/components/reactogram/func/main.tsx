@@ -1,6 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
 import { Chat } from './Chat/chat';
 import { Input } from './Input/input';
+import { NavChat } from "./NavChat/navChat";
 import style from './main.module.scss';
 
 
@@ -9,23 +10,40 @@ interface ReactogramProps {
 }
 
 interface Msg {
-  author: string,
-  time: string,
-  msg: string
+  author: string;
+  time: string;
+  msg: string;
+};
+
+interface ChatItem {
+  link: string;
+  title: string;
 }
 
-
 export const Reactogram: FC<ReactogramProps> = ({ data }) => {
-
-
   const [text, setText] = useState('');
   const [time, setTime] = useState('');
   const [msg, setMsg] = useState<Msg[]>([]);
+  const [chatList, setChatList] = useState<ChatItem[]>([
+    {
+      link: '#',
+      title: 'Канал №1',
+    },
+    {
+      link: '#',
+      title: 'Канал №2',
+    },
+    {
+      link: '#',
+      title: 'Канал №2',
+    },
 
-  useEffect(() => {
-    setTimeout(bot, 1500);
-    //eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  ]);
+
+  // useEffect(() => {
+  //   setTimeout(bot, 1500);
+  //   //eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   useEffect(() => {
     if (msg.length !== 0) {
@@ -46,8 +64,6 @@ export const Reactogram: FC<ReactogramProps> = ({ data }) => {
     setTime(createCurrentTime());
   };
 
-
-
   const actionClick = () => {
     const obj: { msg: string, author: string, time: string } = { msg: text, author: data, time: time };
     setMsg([...msg, obj]);
@@ -58,6 +74,7 @@ export const Reactogram: FC<ReactogramProps> = ({ data }) => {
     return `${time.getHours()} : ${time.getMinutes()} : ${time.getSeconds()}`;
   };
 
+  //TODO Переделать логику бота по возвможности в будущем
   const bot = () => {
     const lengthMsg = msg.length;
     if (lengthMsg === 0) {
@@ -179,8 +196,11 @@ export const Reactogram: FC<ReactogramProps> = ({ data }) => {
 
   return (
     <div className={style.home} data-testid="home-test-id">
-      <Chat message={msg} />
-      <Input click={actionClick} text={text} change={handelChange} />
+      <NavChat list={chatList} />
+      <div className={style.action__block}>
+        <Chat message={msg} />
+        <Input click={actionClick} text={text} change={handelChange} />
+      </div>
     </div>
   );
 };

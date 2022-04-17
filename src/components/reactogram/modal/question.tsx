@@ -15,6 +15,7 @@ export const Question: FC<QuestionProps> = ( { author, change, quest }) => {
               Привет, прежде чем приступить к работе, укажи свое имя
             </p>
             <input
+                id="input_test_id"
                 type="text"
                 value={author}
                 onChange={change}
