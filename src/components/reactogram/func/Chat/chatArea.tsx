@@ -13,7 +13,7 @@ interface ChatProps {
     msg: Msg[];
 }
 
-export const Chat: FC<ChatProps> = ({ msg }) => {
+export const ChatArea: FC<ChatProps> = ({ msg }) => {
   const reversArr = () => {
     const arr = [...msg];
     return arr.reverse();

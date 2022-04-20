@@ -1,12 +1,12 @@
 import React, { FC, useState } from 'react';
-import { Chats } from '../main';
+import { Chat } from '../main';
 import { Link } from 'react-router-dom';
 import {nanoid} from "nanoid";
 
 
 interface ChatListProps {
-    chatlist: Chats[];
-    addChat: (chats: Chats[]) => void;
+    chatlist: Chat[];
+    addChat: (chats: Chat[]) => void;
 }
 export const  ChatList: FC<ChatListProps> = ({ chatlist, addChat } ) => {
     const [name, setName] = useState('')
@@ -24,7 +24,7 @@ export const  ChatList: FC<ChatListProps> = ({ chatlist, addChat } ) => {
         <ul>
             {chatlist.map( chat =>
                 <li key={chat.id}>
-                    <Link to={chat.id} >{chat.name}</Link>
+                    <Link to={`/chats/${chat.id}`} >{chat.name}</Link>
                 </li>
                 )}
         </ul>

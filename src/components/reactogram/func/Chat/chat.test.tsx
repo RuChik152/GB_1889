@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { Chat } from './chat';
+import { ChatArea } from './chatArea';
 
 
 
@@ -36,15 +36,15 @@ const createArr = () => {
 
 describe('Chat', () => {
   it('render component', () => {
-    render(<Chat msg={msg} />);
+    render(<ChatArea msg={msg} />);
   });
 
   it('Snapshot test', () => {
-    const { asFragment } = render(<Chat msg={msg} />);
+    const { asFragment } = render(<ChatArea msg={msg} />);
     expect(asFragment()).toMatchSnapshot();
   });
 
   it('Send a large array of messages', () => {
-    render(<Chat msg={createArr()} />);
+    render(<ChatArea msg={createArr()} />);
   });
 });

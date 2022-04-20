@@ -2,8 +2,10 @@ import React, {FC, useCallback, useEffect, useState} from 'react';
 import {AUTHOR, createCurrentTime} from "../../modal/utility";
 import {nanoid} from "nanoid";
 import style from "../main.module.scss";
-import {Chat} from "../Chat/chat";
+import {ChatArea} from "../Chat/chatArea";
 import {Input} from "../Input/input";
+import {ChatList} from "../ChatList/ChatList";
+import {Chat} from "../main";
 
 interface Msg {
     id: string;
@@ -12,7 +14,12 @@ interface Msg {
     msg: string;
 };
 
-export const Chats = () => {
+interface ChatsProps {
+    chatlist: Chat[];
+    addChat: (chats: Chat[]) => void;
+}
+
+export const Chats: FC<ChatsProps> = ({ chatlist, addChat}) => {
     const [msg, setMsg] = useState<Msg[]>([]);
 
     useEffect(() => {
@@ -48,9 +55,10 @@ export const Chats = () => {
 
     return (<>
             {/*<NavChat />*/}
+            <ChatList chatlist={chatlist} addChat={addChat}/>
             <div className={style.home} data-testid="home-test-id">
                 <div className={style.action__block}>
-                    <Chat msg={msg} />
+                    <ChatArea msg={msg} />
                     <Input change={addMessage} />
                 </div>
             </div>

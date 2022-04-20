@@ -13,12 +13,12 @@ import {ChatList} from "./ChatList/ChatList";
 //     msg: string;
 // };
 
-export interface Chats {
+export interface Chat {
     id: string;
     name: string;
 }
 
-const initialChat: Chats[] = [
+const initialChat: Chat[] = [
     {
         id: '1',
         name: 'chat'
@@ -27,7 +27,7 @@ const initialChat: Chats[] = [
 
 
 export const Reactogram: FC = () => {
-    const [chatlist, setChatlist] = useState<Chats[]>(initialChat);
+    const [chatlist, setChatlist] = useState<Chat[]>(initialChat);
     return(
     <BrowserRouter>
         <Routes>
@@ -36,7 +36,7 @@ export const Reactogram: FC = () => {
                 <Route path="profile" element={<Profile />}/>
                 <Route path="chats">
                     <Route index element={<ChatList chatlist={ chatlist }  addChat={setChatlist}/>}/>
-                    <Route path=":chaiId" element={<Chats />}/>
+                    <Route path=":chaiId" element={<Chats chatlist={ chatlist }  addChat={setChatlist} />}/>
                 </Route>
             </Route>
             <Route path="*" element={<h2>404</h2>}/>

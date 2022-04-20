@@ -1,12 +1,12 @@
 import React from 'react';
-import { Chat } from './chat';
+import { ChatArea } from './chatArea';
 
 export default {
-  title: 'Reactorgam/Chat',
-  component: Chat,
+  title: 'Reactorgam/ChatArea',
+  component: ChatArea,
 };
 
-const Template = (args) => <Chat {...args} />;
+const Template = (args) => <ChatArea {...args} />;
 
 export const Primary = Template.bind({});
 
