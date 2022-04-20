@@ -67,7 +67,6 @@ export const Chats: FC<ChatsProps> = ({ chatlist, addChatList, msg, setMsg}) => 
     }
 
     return (<>
-            {/*<NavChat />*/}
             <ChatList chatlist={chatlist} addChatList={addChatList}/>
             <div className={style.home} data-testid="home-test-id">
                 <div className={style.action__block}>
