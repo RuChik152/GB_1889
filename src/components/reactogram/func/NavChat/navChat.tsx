@@ -11,11 +11,27 @@ interface NavChatProps {
     list: ChatItem[];
 }
 
-export const NavChat: FC<NavChatProps> = ({ list }) => {
+export const NavChat: FC<NavChatProps> = () => {
+
+    const [chatList, setChatList] = useState<ChatItem[]>([
+      {
+        link: '#',
+        title: 'Канал №1',
+      },
+      {
+        link: '#',
+        title: 'Канал №2',
+      },
+      {
+        link: '#',
+        title: 'Канал №2',
+      },
+
+    ])
 
     return  <ul className={style.list} data-testid="chat_test-id">
         {
-            list.map((item, index) => <NavChatItem link={item.link} title={item.title} key={index} />)
+            chatList.map((item, index) => <NavChatItem link={item.link} title={item.title} key={index} />)
         }
         </ul>
 

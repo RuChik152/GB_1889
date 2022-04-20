@@ -4,23 +4,10 @@ import { Reactogram } from './components/reactogram/func/main';
 import { Question } from './components/reactogram/modal/question';
 
 export const App = () => {
-  const [author, setAuthor] = useState('');
-  const [active, setActive] = useState(true);
-
-  const changeAuthor = useCallback((e) => {
-    setAuthor(e.target.value);
-  }, []);
-
-  const quest = useCallback(() => {
-    setActive(!active);
-  }, [active]);
 
   return (
     <>
-      {active && (
-        <Question author={author} quest={quest} change={changeAuthor} />
-      )}
-      {!active && <Reactogram data={author} />}
+      <Reactogram />
     </>
   );
 };

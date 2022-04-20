@@ -5,11 +5,11 @@ import { Reactogram } from './main';
 
 describe('Main', () => {
   it('Render', () => {
-    render(<Reactogram data={'TEST_NAME'} />);
+    render(<Reactogram />);
   });
 
   it('Render input and button', () => {
-    const { getByPlaceholderText, getByTestId } = render(<Reactogram data={'TEST_NAME'} />);
+    const { getByPlaceholderText, getByTestId } = render(<Reactogram />);
     const inputText = getByPlaceholderText('Ваше сообщение');
     const btn = getByTestId('test-id');
     expect(inputText).toBeInTheDocument();
@@ -17,13 +17,13 @@ describe('Main', () => {
   });
 
   it('render chat', () => {
-    const { getByTestId } = render(<Reactogram data={'TEST_NAME'} />);
+    const { getByTestId } = render(<Reactogram />);
     const el = getByTestId('chat-test');
     expect(el).toBeInTheDocument();
   });
 
   it('Snapshot', () => {
-    const { asFragment } = render(<Reactogram data={'TEST_NAME'} />);
+    const { asFragment } = render(<Reactogram />);
     expect(asFragment()).toMatchSnapshot();
   });
 });
