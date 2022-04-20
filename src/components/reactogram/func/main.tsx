@@ -1,9 +1,10 @@
-import React, {FC} from 'react';
+import React, {FC, useState} from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import {Home} from "./pages/Home";
 import {Profile} from "./pages/Profile";
 import {Header} from "./Header";
 import {Chats} from "./pages/Chats";
+import {ChatList} from "./ChatList/ChatList";
 
 // interface Msg {
 //     id: string;
@@ -12,8 +13,21 @@ import {Chats} from "./pages/Chats";
 //     msg: string;
 // };
 
-export const Reactogram: FC = () => {
+export interface Chats {
+    id: string;
+    name: string;
+}
 
+const initialChat: Chats[] = [
+    {
+        id: '1',
+        name: 'chat'
+    }
+]
+
+
+export const Reactogram: FC = () => {
+    const [chatlist, setChatlist] = useState<Chats[]>(initialChat);
     return(
     <BrowserRouter>
         <Routes>
@@ -21,7 +35,8 @@ export const Reactogram: FC = () => {
                 <Route index element={<Home />} />
                 <Route path="profile" element={<Profile />}/>
                 <Route path="chats">
-                    <Route index element={<Chats/>}/>
+                    <Route index element={<ChatList chatlist={ chatlist }  addChat={setChatlist}/>}/>
+                    <Route path=":chaiId" element={<Chats />}/>
                 </Route>
             </Route>
             <Route path="*" element={<h2>404</h2>}/>
