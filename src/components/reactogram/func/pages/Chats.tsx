@@ -32,7 +32,7 @@ export const Chats: FC<ChatsProps> = ({ chatlist, addChatList, msg, setMsg}) => 
 
     useEffect(() => {
         if( chaiId &&
-            msg[chaiId].length > 0 &&
+            msg[chaiId]?.length > 0 &&
             msg[chaiId][msg[chaiId].length - 1].author !== AUTHOR.bot ) {
             const timer = setTimeout(() => {
                 setMsg({
@@ -60,6 +60,10 @@ export const Chats: FC<ChatsProps> = ({ chatlist, addChatList, msg, setMsg}) => 
         if (chaiId) {
             setMsg((prevMessage) => ({...prevMessage, [chaiId]: [...prevMessage[chaiId],{id: nanoid(),author: AUTHOR.user,msg: value,time: createCurrentTime()},],}));
         }
+    }
+
+    if(chaiId && !msg[chaiId]){
+        return <Navigate replace to="/chats"/>
     }
 
     return (<>
