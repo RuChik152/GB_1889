@@ -25,9 +25,18 @@ const initialChat: Chat[] = [
     }
 ]
 
+interface Msg {
+    id: string;
+    author: string;
+    time: string;
+    msg: string;
+};
+
+
 
 export const Reactogram: FC = () => {
     const [chatlist, setChatlist] = useState<Chat[]>(initialChat);
+    const [msg, setMsg] = useState<Msg[]>([]);
     return(
     <BrowserRouter>
         <Routes>
@@ -36,7 +45,7 @@ export const Reactogram: FC = () => {
                 <Route path="profile" element={<Profile />}/>
                 <Route path="chats">
                     <Route index element={<ChatList chatlist={ chatlist }  addChat={setChatlist}/>}/>
-                    <Route path=":chaiId" element={<Chats chatlist={ chatlist }  addChat={setChatlist} />}/>
+                    <Route path=":chaiId" element={<Chats setMsg={setMsg} msg={msg} chatlist={ chatlist }  addChat={setChatlist} />}/>
                 </Route>
             </Route>
             <Route path="*" element={<h2>404</h2>}/>

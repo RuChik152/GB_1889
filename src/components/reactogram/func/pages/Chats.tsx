@@ -15,12 +15,14 @@ interface Msg {
 };
 
 interface ChatsProps {
+    msg: Msg[];
+    setMsg:  React.Dispatch<React.SetStateAction<Msg[]>>;
     chatlist: Chat[];
     addChat: (chats: Chat[]) => void;
 }
 
-export const Chats: FC<ChatsProps> = ({ chatlist, addChat}) => {
-    const [msg, setMsg] = useState<Msg[]>([]);
+export const Chats: FC<ChatsProps> = ({ chatlist, addChat, msg, setMsg}) => {
+
 
     useEffect(() => {
         if( msg.length > 0 && msg[msg.length - 1].author !== AUTHOR.bot ) {
