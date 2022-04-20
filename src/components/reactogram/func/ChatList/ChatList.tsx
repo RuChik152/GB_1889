@@ -6,19 +6,20 @@ import {nanoid} from "nanoid";
 
 interface ChatListProps {
     chatlist: Chat[];
-    addChat: (chats: Chat[]) => void;
+    addChatList: (chats: Chat) => void;
 }
-export const  ChatList: FC<ChatListProps> = ({ chatlist, addChat } ) => {
+export const  ChatList: FC<ChatListProps> = ({ chatlist, addChatList } ) => {
     const [name, setName] = useState('')
 
 
     const handelSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         if(name) {
-            addChat([...chatlist, {id: nanoid(), name, }]);
+            addChatList({ id: nanoid(), name, });
             setName('');
         }
     }
+
     return(
         <>
         <ul>

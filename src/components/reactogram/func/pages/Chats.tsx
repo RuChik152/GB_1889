@@ -1,4 +1,5 @@
 import React, {FC, useCallback, useEffect, useState} from 'react';
+import { Navigate, useParams } from 'react-router-dom';
 import {AUTHOR, createCurrentTime} from "../../modal/utility";
 import {nanoid} from "nanoid";
 import style from "../main.module.scss";
@@ -6,6 +7,10 @@ import {ChatArea} from "../Chat/chatArea";
 import {Input} from "../Input/input";
 import {ChatList} from "../ChatList/ChatList";
 import {Chat} from "../main";
+
+interface Msgs {
+    [key: string]: Msg[];
+}
 
 interface Msg {
     id: string;
@@ -15,27 +20,34 @@ interface Msg {
 };
 
 interface ChatsProps {
-    msg: Msg[];
-    setMsg:  React.Dispatch<React.SetStateAction<Msg[]>>;
+    msg: Msgs;
+    setMsg:  React.Dispatch<React.SetStateAction<Msgs>>;
     chatlist: Chat[];
-    addChat: (chats: Chat[]) => void;
+    addChatList: (chats: Chat) => void;
 }
 
-export const Chats: FC<ChatsProps> = ({ chatlist, addChat, msg, setMsg}) => {
+export const Chats: FC<ChatsProps> = ({ chatlist, addChatList, msg, setMsg}) => {
 
+    const { chaiId } = useParams()
 
     useEffect(() => {
-        if( msg.length > 0 && msg[msg.length - 1].author !== AUTHOR.bot ) {
+        if( chaiId &&
+            msg[chaiId].length > 0 &&
+            msg[chaiId][msg[chaiId].length - 1].author !== AUTHOR.bot ) {
             const timer = setTimeout(() => {
-                setMsg([
+                setMsg({
                     ...msg,
+                [chaiId]:[
+                    ...msg[chaiId],
                     {
                         id: nanoid(),
                         author: AUTHOR.bot,
                         time: createCurrentTime(),
                         msg: `I am ${AUTHOR.bot}`,
-                    },
-                ]);
+                    }
+                ]
+            ,
+            });
             }, 1000);
             return () => {
                 clearTimeout(timer);
@@ -43,24 +55,19 @@ export const Chats: FC<ChatsProps> = ({ chatlist, addChat, msg, setMsg}) => {
         }
     }, [msg]);
 
-    const addMessage = useCallback((value: string) => {
-        setMsg((item) => [
-            ...item,
-            {
-                id: nanoid(),
-                author: AUTHOR.user,
-                time: createCurrentTime(),
-                msg: value,
-            },
-        ]);
-    }, []);
+
+    const addMessage = (value: string) => {
+        if (chaiId) {
+            setMsg((prevMessage) => ({...prevMessage, [chaiId]: [...prevMessage[chaiId],{id: nanoid(),author: AUTHOR.user,msg: value,time: createCurrentTime()},],}));
+        }
+    }
 
     return (<>
             {/*<NavChat />*/}
-            <ChatList chatlist={chatlist} addChat={addChat}/>
+            <ChatList chatlist={chatlist} addChatList={addChatList}/>
             <div className={style.home} data-testid="home-test-id">
                 <div className={style.action__block}>
-                    <ChatArea msg={msg} />
+                    <ChatArea msg={ chaiId ? msg[chaiId] : []} />
                     <Input change={addMessage} />
                 </div>
             </div>

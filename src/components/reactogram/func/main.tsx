@@ -5,6 +5,7 @@ import {Profile} from "./pages/Profile";
 import {Header} from "./Header";
 import {Chats} from "./pages/Chats";
 import {ChatList} from "./ChatList/ChatList";
+import {AUTHOR, createCurrentTime} from "../modal/utility";
 
 // interface Msg {
 //     id: string;
@@ -20,10 +21,21 @@ export interface Chat {
 
 const initialChat: Chat[] = [
     {
-        id: '1',
+        id: 'default',
         name: 'chat'
     }
 ]
+
+const initialMsgs: Msgs = {
+    default: [
+        {
+            id: '1',
+            author: AUTHOR.user,
+            time: createCurrentTime(),
+            msg: 'Hello World'
+        }
+    ]
+}
 
 interface Msg {
     id: string;
@@ -32,11 +44,22 @@ interface Msg {
     msg: string;
 };
 
-
+interface Msgs {
+    [key: string]: Msg[];
+}
 
 export const Reactogram: FC = () => {
     const [chatlist, setChatlist] = useState<Chat[]>(initialChat);
-    const [msg, setMsg] = useState<Msg[]>([]);
+    const [msg, setMsg] = useState<Msgs>(initialMsgs);
+
+    const addChatList = (chat: Chat) => {
+        setChatlist([ ...chatlist, chat ]);
+        setMsg({
+            ...msg,
+            [chat.id]:[],
+        });
+    };
+
     return(
     <BrowserRouter>
         <Routes>
@@ -44,8 +67,8 @@ export const Reactogram: FC = () => {
                 <Route index element={<Home />} />
                 <Route path="profile" element={<Profile />}/>
                 <Route path="chats">
-                    <Route index element={<ChatList chatlist={ chatlist }  addChat={setChatlist}/>}/>
-                    <Route path=":chaiId" element={<Chats setMsg={setMsg} msg={msg} chatlist={ chatlist }  addChat={setChatlist} />}/>
+                    <Route index element={<ChatList chatlist={ chatlist }  addChatList={addChatList}/>}/>
+                    <Route path=":chaiId" element={<Chats setMsg={setMsg} msg={msg} chatlist={ chatlist }  addChatList={addChatList} />}/>
                 </Route>
             </Route>
             <Route path="*" element={<h2>404</h2>}/>
