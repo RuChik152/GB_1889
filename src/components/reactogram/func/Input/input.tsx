@@ -2,12 +2,6 @@ import React, {FC, SetStateAction, useState} from 'react';
 import style from './input.module.scss';
 import { Button as ButtonUI, Input as InputUI } from '@mui/material';
 
-// interface InputProps {
-//   text: string;
-//   change: () => React.ChangeEvent<HTMLInputElement>;
-//   click: () => void;
-// }
-
 interface Props {
     change: ( e: string) => void;
 }

@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react';
 import { Chat } from '../main';
-import {Link, NavLink} from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { nanoid } from "nanoid";
 import style from './chatList.module.scss'
 import { Button, Input, TextField} from "@mui/material";
@@ -31,7 +31,7 @@ export const  ChatList: FC<ChatListProps> = ({ chatlist, addChatList } ) => {
                 </li>
                 )}
         </ul>
-            <form className={style.form} onSubmit={handelSubmit}>
+            <form className={ style.form } onSubmit={ handelSubmit }>
                 <Input type = "text" value={name}  onChange={(e) => setName(e.target.value)}/>
                 <Button disabled={!name} variant="contained" type="submit" >ADD</Button>
             </form>

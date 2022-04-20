@@ -1,29 +1,22 @@
-import React, {FC, useState} from 'react';
+import React, { FC, useState} from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import {Home} from "./pages/Home";
-import {Profile} from "./pages/Profile";
-import {Header} from "./Header";
-import {Chats} from "./pages/Chats";
-import {ChatList} from "./ChatList/ChatList";
-import {AUTHOR, createCurrentTime} from "../modal/utility";
-
-// interface Msg {
-//     id: string;
-//     author: string;
-//     time: string;
-//     msg: string;
-// };
+import { Home } from './pages/Home';
+import { Profile } from './pages/Profile';
+import { Header } from './Header';
+import { Chats } from './pages/Chats';
+import { ChatList } from './ChatList/ChatList';
+import { AUTHOR, createCurrentTime } from '../modal/utility';
 
 export interface Chat {
-    id: string;
-    name: string;
+  id: string;
+  name: string;
 }
 
 const initialChat: Chat[] = [
-    {
-        id: 'default',
-        name: 'chat'
-    }
+  {
+    id: 'default',
+    name: 'chat'
+  }
 ]
 
 const initialMsgs: Msgs = {
@@ -38,27 +31,24 @@ const initialMsgs: Msgs = {
 }
 
 interface Msg {
-    id: string;
-    author: string;
-    time: string;
-    msg: string;
+  id: string;
+  author: string;
+  time: string;
+  msg: string;
 };
 
 interface Msgs {
-    [key: string]: Msg[];
+  [key: string]: Msg[];
 }
 
 export const Reactogram: FC = () => {
-    const [chatlist, setChatlist] = useState<Chat[]>(initialChat);
-    const [msg, setMsg] = useState<Msgs>(initialMsgs);
+  const [chatlist, setChatlist] = useState<Chat[]>(initialChat);
+  const [msg, setMsg] = useState<Msgs>(initialMsgs);
 
-    const addChatList = (chat: Chat) => {
-        setChatlist([ ...chatlist, chat ]);
-        setMsg({
-            ...msg,
-            [chat.id]:[],
-        });
-    };
+  const addChatList = (chat: Chat) => {
+      setChatlist([ ...chatlist, chat ]);
+      setMsg({ ...msg, [chat.id]:[]});
+  };
 
     return(
     <BrowserRouter>
