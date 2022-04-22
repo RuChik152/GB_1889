@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { Input } from './input';
 import userEvent from '@testing-library/user-event';
@@ -53,7 +53,7 @@ describe('Input', () => {
 
   it('returning data', () => {
     render(<Input />);
-    const item = screen.getByTestId('test-id')
+    const item = screen.getByTestId('test-id');
     item.value = 'test';
     expect(item.value).toBe('test');
   });
