@@ -29,10 +29,8 @@ describe('Question', () => {
     const handelClick = jest.fn();
     const { getByRole } = render(<Question quest={handelClick} />);
     const btn = getByRole('button');
-    userEvent.click(btn);
-    await waitFor(() => expect(handelClick).toHaveBeenCalledTimes(1), {
-      timeout: 1000,
-    });
+    await userEvent.click(btn);
+    expect(handelClick).toHaveBeenCalledTimes(1);
   });
 
   it('Snapshot', () => {

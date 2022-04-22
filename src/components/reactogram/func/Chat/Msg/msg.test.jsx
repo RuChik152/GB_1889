@@ -14,11 +14,6 @@ describe('Msg', () => {
     render(<Msg item={data} />);
   });
 
-  it('with text', () => {
-    render(<Msg item={data} />);
-    expect(screen.getByText(/[A-Za-z]/)).toBeInTheDocument();
-  });
-
   it('text on elements', () => {
     render(<Msg item={data} />);
     expect(screen.getByTestId('test-author').innerHTML).toBe('admin');
