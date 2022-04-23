@@ -8,10 +8,14 @@ import { Button, Input, TextField} from "@mui/material";
 interface ChatListProps {
     chatlist: Chat[];
     addChatList: (chats: Chat) => void;
+    removeChatList: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
-export const  ChatList: FC<ChatListProps> = ({ chatlist, addChatList } ) => {
+export const  ChatList: FC<ChatListProps> = ({ chatlist, addChatList, removeChatList } ) => {
     const [name, setName] = useState('')
 
+    const action = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        removeChatList(e)
+    }
 
     const handelSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -21,13 +25,13 @@ export const  ChatList: FC<ChatListProps> = ({ chatlist, addChatList } ) => {
         }
     }
 
-
     return(
         <div className={style.chat}>
         <ul className={style.chat__list}>
             {chatlist.map( chat =>
                 <li key={chat.id}>
                     <NavLink to={`/chats/${chat.id}`} style={({ isActive }) => ({ color: isActive ? '#cbcbcb' : '#000000' })}>{chat.name}</NavLink>
+                    <button data-id={chat.id} onClick={  action }>X</button>
                 </li>
                 )}
         </ul>

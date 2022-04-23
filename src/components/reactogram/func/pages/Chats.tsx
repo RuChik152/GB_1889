@@ -24,9 +24,10 @@ interface ChatsProps {
     setMsg:  React.Dispatch<React.SetStateAction<Msgs>>;
     chatlist: Chat[];
     addChatList: (chats: Chat) => void;
+    removeChatList: (e: { target: { dataset: { id: string }; }; }) => void;
 }
 
-export const Chats: FC<ChatsProps> = ({ chatlist, addChatList, msg, setMsg}) => {
+export const Chats: FC<ChatsProps> = ({ chatlist, addChatList, msg, setMsg, removeChatList}) => {
 
     const { chaiId } = useParams();
 
@@ -56,7 +57,7 @@ export const Chats: FC<ChatsProps> = ({ chatlist, addChatList, msg, setMsg}) => 
     }
 
     return (<>
-            <ChatList chatlist={ chatlist } addChatList={ addChatList }/>
+            <ChatList chatlist={ chatlist } addChatList={ addChatList } removeChatList={ removeChatList }/>
             <div className={ style.home } data-testid="home-test-id">
                 <div className={ style.action__block }>
                     <ChatArea msg={ chaiId ? msg[chaiId] : []} />
