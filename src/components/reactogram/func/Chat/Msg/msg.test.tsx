@@ -21,12 +21,7 @@ describe('Msg', () => {
     expect(screen.getByText(/10:10:10/i)).toBeInTheDocument();
   });
 
-  it('text on elements', () => {
-    render(<Msg author={'Имя Автора'} msg={'Какой то текст'} time={'10:10:10'} />);
-    expect(screen.getByTestId('test-author').innerHTML).toBe('Имя Автора');
-    expect(screen.getByTestId('test-text').innerHTML).toBe('Какой то текст');
-    expect(screen.getByTestId('test-time').innerHTML).toBe('Время: 10:10:10');
-  });
+
 
   it('Snapshot test', () => {
     const { asFragment } = render(<Msg author={'Имя Автора'} msg={'Какой то текст'} time={'10:10:10'} />);
