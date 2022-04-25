@@ -8,12 +8,12 @@ import { Button, Input, TextField} from "@mui/material";
 interface ChatListProps {
     chatlist: Chat[];
     addChatList: (chats: Chat) => void;
-    removeChatList: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+    removeChatList: (e: any) => void;
 }
 export const  ChatList: FC<ChatListProps> = ({ chatlist, addChatList, removeChatList } ) => {
     const [name, setName] = useState('')
 
-    const action = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const action = (e: any) => {
         removeChatList(e)
     }
 
