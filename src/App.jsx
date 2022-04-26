@@ -1,14 +1,27 @@
-import React from "react";
-import './App.css';
-import { Form } from "./components/FormFunc/Form";
+import React, { useState, useCallback } from 'react';
+import './App.scss';
+import { Reactogram } from './components/reactogram/func/main';
+//import { Reactogram } from "./components/reactogram/class/main";
+import { Question } from './components/reactogram/modal/question';
 
+export const App = () => {
+  const [author, setAuthor] = useState('');
+  const [active, setActive] = useState(true);
 
-const App = () => {
-    return  <>
-                <Form />
-            </>
-}
+  const changeAuthor = useCallback((e) => {
+    setAuthor(e.target.value);
+  }, []);
 
-export {
-    App
-}
+  const quest = useCallback(() => {
+    setActive(!active);
+  }, [active]);
+
+  return (
+    <>
+      {active && (
+        <Question author={author} quest={quest} change={changeAuthor} />
+      )}
+      {!active && <Reactogram data={author} />}
+    </>
+  );
+};

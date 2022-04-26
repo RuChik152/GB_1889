@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Question Snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="modal"
+  >
+    <div
+      class="modal__item"
+    >
+      <p
+        class="modal__text"
+      >
+        Привет, прежде чем приступить к работе, укажи свое имя
+      </p>
+      <input
+        class="modal__name"
+        id="input_test_id"
+        placeholder="Ваше Имя"
+        type="text"
+        value="test_name"
+      />
+      <button
+        class="modal__btn"
+        data-testid="quest-data-test"
+      >
+        Отправить
+      </button>
+    </div>
+  </div>
+</DocumentFragment>
+`;
