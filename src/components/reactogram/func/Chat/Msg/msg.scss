@@ -1,0 +1,29 @@
+.msg__item{
+  background-color: #c0cad4;
+  padding: 15px;
+  border-radius: 4px;
+  margin: 11px 0px;
+  font-size: 17px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  .item__author{
+    color: #a50000;
+    font-weight: 500;
+    margin-bottom: 7px;
+  }
+  .item__text {
+    background: #e5e5e5;
+    display: inline-block;
+    padding: 20px;
+    border-radius: 4px;
+  }
+  .item__time{
+    background: #bbbbbb;
+    display: inline-block;
+    margin-top: 10px;
+    padding: 7px;
+    font-size: 16px;
+    border-radius: 4px;
+  }
+}
