@@ -3,10 +3,5 @@ import './App.scss';
 import { Reactogram } from './components/reactogram/func/main';
 
 export const App = () => {
-
-  return (
-    <>
-      <Reactogram />
-    </>
-  );
+  return <Reactogram />;
 };

@@ -56,25 +56,18 @@ export const Reactogram: FC = () => {
   };
 
   const removeChatList = (e: { target: { dataset: { id: string } } }) => {
-    const id: string = e.target.dataset.id;
-    const idxList = chatlist.findIndex(
-      (item) => item.id == e.target.dataset.id
-    );
-    setChatlist([...delList(chatlist, idxList)]);
-    setMsg({ ...delMsg(msg, id) });
+    setChatlist([...delList(chatlist, e.target.dataset.id)]);
+    setMsg({ ...delMsg(msg, e.target.dataset.id) });
   };
 
-  const delList = (arr: Chat[], idx: number) => {
-    const newArr = [...arr];
-    newArr.splice(idx, 1);
-    return newArr;
+  const delList = (arr: Chat[], idx: string) => {
+    return arr.filter( (elem) => elem.id !== idx);
   };
 
   const delMsg = (obj: Msgs, idx: string) => {
     const arr = { ...obj };
     delete arr[idx];
-    const arrNew = { ...arr };
-    return arrNew;
+    return arr;
   };
 
   const toggleTheme = () => {
@@ -124,5 +117,6 @@ export const Reactogram: FC = () => {
         </BrowserRouter>
       </ThemeContext.Provider>
     </Provider>
+
   );
 };
