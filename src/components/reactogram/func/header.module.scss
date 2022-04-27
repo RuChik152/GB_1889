@@ -4,12 +4,20 @@
 
 .list__page {
   display: flex;
-  width: 100vw;
-  background-color: #a9a9a9db;
-  margin-bottom: 19px;
+  //width: 100vw;
+  //background-color: #a9a9a9db;
+  //margin-bottom: 19px;
 }
 
 .item {
   width: 55px;
   padding: 8px;
+}
+
+.header__container {
+  display: flex;
+  justify-content: space-between;
+  width: 100vw;
+  background-color: rgb(168 169 169);
+  margin-bottom: 19px;
 }

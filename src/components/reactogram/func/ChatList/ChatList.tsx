@@ -8,7 +8,7 @@ import { Button, Input, TextField} from "@mui/material";
 interface ChatListProps {
     chatlist: Chat[];
     addChatList: (chats: Chat) => void;
-    removeChatList: (e: any) => void;
+    removeChatList: (e: {target: {dataset: {id: string}}}) => void
 }
 export const  ChatList: FC<ChatListProps> = ({ chatlist, addChatList, removeChatList } ) => {
     const [name, setName] = useState('')
