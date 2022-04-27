@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import style from './msg.module.scss';
 
 interface MsgProps {
+  key: string;
   author: string;
   msg: string;
   time: string;
