@@ -9,7 +9,6 @@ import { Header } from './Header';
 import { Chats } from './pages/Chats';
 import { ChatList } from './ChatList/ChatList';
 import { AUTHOR, createCurrentTime } from '../modal/utility';
-import { light } from '@mui/material/styles/createPalette';
 import { store } from './store';
 
 export interface Chat {

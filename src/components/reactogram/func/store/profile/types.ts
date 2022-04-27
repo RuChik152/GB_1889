@@ -1,6 +1,6 @@
-import { CHANGE_NAME, TOGGLE_PROFILE} from "./actions";
+import { CHANGE_LAST_NAME, CHANGE_NAME, TOGGLE_PROFILE} from "./actions";
 
-export type ProfileActions = ToggleProfile | ChangeName;
+export type ProfileActions = ToggleProfile | ChangeName | changeLastName;
 
 export interface ToggleProfile {
     type: typeof TOGGLE_PROFILE;
@@ -11,3 +11,7 @@ export interface ChangeName {
     name: string;
 }
 
+export interface changeLastName {
+    type: typeof CHANGE_LAST_NAME;
+    name: string;
+}
