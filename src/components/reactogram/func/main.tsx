@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, HashRouter } from 'react-router-dom';
 import { Home } from './pages/Home';
 import { Profile } from './pages/Profile';
 import { Header } from './Header';
@@ -69,7 +69,7 @@ export const Reactogram: FC = () => {
   };
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         <Route path="/" element={<Header />}>
           <Route index element={<Home />} />
@@ -101,6 +101,6 @@ export const Reactogram: FC = () => {
         </Route>
         <Route path="*" element={<h2>404</h2>} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 };
