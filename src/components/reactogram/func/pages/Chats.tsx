@@ -6,26 +6,9 @@ import style from '../main.module.scss';
 import { ChatArea } from '../Chat/chatArea';
 import { Input } from '../Input/input';
 import { ChatList } from '../ChatList/ChatList';
-import { Chat } from '../main';
+import { ChatsProps } from './typeChats';
 
-interface Msgs {
-  [key: string]: Msg[];
-}
 
-interface Msg {
-  id: string;
-  author: string;
-  time: string;
-  msg: string;
-}
-
-interface ChatsProps {
-  msg: Msgs;
-  setMsg: React.Dispatch<React.SetStateAction<Msgs>>;
-  chatlist: Chat[];
-  addChatList: (chats: Chat) => void;
-  removeChatList: (e: { target: { dataset: { id: string } } }) => void;
-}
 
 export const Chats: FC<ChatsProps> = ({
   chatlist,
