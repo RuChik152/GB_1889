@@ -1,4 +1,4 @@
-import React, { FC, useState} from 'react';
+import React, { FC, useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Home } from './pages/Home';
 import { Profile } from './pages/Profile';
@@ -15,27 +15,27 @@ export interface Chat {
 const initialChat: Chat[] = [
   {
     id: 'default',
-    name: 'chat'
-  }
-]
+    name: 'chat',
+  },
+];
 
 const initialMsgs: Msgs = {
-    default: [
-        {
-            id: '1',
-            author: AUTHOR.user,
-            time: createCurrentTime(),
-            msg: 'Hello World'
-        }
-    ]
-}
+  default: [
+    {
+      id: '1',
+      author: AUTHOR.user,
+      time: createCurrentTime(),
+      msg: 'Hello World',
+    },
+  ],
+};
 
 interface Msg {
   id: string;
   author: string;
   time: string;
   msg: string;
-};
+}
 
 interface Msgs {
   [key: string]: Msg[];
@@ -46,43 +46,64 @@ export const Reactogram: FC = () => {
   const [msg, setMsg] = useState<Msgs>(initialMsgs);
 
   const addChatList = (chat: Chat) => {
-      setChatlist([ ...chatlist, chat ]);
-      setMsg({ ...msg, [chat.id]:[]});
-
+    setChatlist([...chatlist, chat]);
+    setMsg({ ...msg, [chat.id]: [] });
   };
 
-  const removeChatList = (e: { target: { dataset: { id: string | undefined; }; }; }) => {
-        const idxList = chatlist.findIndex( item => item.id == e.target.dataset.id);
-        setChatlist([ ...delList( chatlist, idxList ) ]);
-        setMsg({ ...delMsg( msg, e.target.dataset.id ) });
-    }
+  const removeChatList = (e: { target: { dataset: { id: string } } }) => {
+    const idxList = chatlist.findIndex(
+      (item) => item.id == e.target.dataset.id
+    );
+    setChatlist([...delList(chatlist, idxList)]);
+    setMsg({ ...delMsg(msg, e.target.dataset.id) });
+  };
 
   const delList = (arr: Chat[], idx: number) => {
-      const newArr = [...arr];
-      newArr.splice( idx, 1);
-      return newArr;
+    const newArr = [...arr];
+    newArr.splice(idx, 1);
+    return newArr;
   };
 
-  const delMsg = (obj: {}, idx: string | undefined) => {
-      const arr = {...obj};
-      delete arr[`${idx}`];
-      const arrNew = {...arr}
-      return arrNew
-  }
+  const delMsg = (obj: Msgs, idx: string) => {
+    const arr = { ...obj };
+    delete arr[idx];
+    const arrNew = { ...arr };
+    return arrNew;
+  };
 
-    return(
+  return (
     <BrowserRouter>
-        <Routes>
-            <Route path="/" element={<Header />}>
-                <Route index element={<Home />} />
-                <Route path="profile" element={<Profile />}/>
-                <Route path="chats">
-                    <Route index element={<ChatList chatlist={ chatlist }  addChatList={addChatList} removeChatList={ removeChatList }/>}/>
-                    <Route path=":chaiId" element={<Chats setMsg={setMsg} msg={msg} chatlist={ chatlist }  addChatList={addChatList} removeChatList={removeChatList}/>}/>
-                </Route>
-            </Route>
-            <Route path="*" element={<h2>404</h2>}/>
-        </Routes>
+      <Routes>
+        <Route path="/" element={<Header />}>
+          <Route index element={<Home />} />
+          <Route path="profile" element={<Profile />} />
+          <Route path="chats">
+            <Route
+              index
+              element={
+                <ChatList
+                  chatlist={chatlist}
+                  addChatList={addChatList}
+                  removeChatList={removeChatList}
+                />
+              }
+            />
+            <Route
+              path=":chaiId"
+              element={
+                <Chats
+                  setMsg={setMsg}
+                  msg={msg}
+                  chatlist={chatlist}
+                  addChatList={addChatList}
+                  removeChatList={removeChatList}
+                />
+              }
+            />
+          </Route>
+        </Route>
+        <Route path="*" element={<h2>404</h2>} />
+      </Routes>
     </BrowserRouter>
-    )
+  );
 };
