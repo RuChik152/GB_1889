@@ -18,8 +18,18 @@ module.exports = {
         extensions: [ '.jsx', '.js', '.tsx', '.ts','.scss', '.jpg', '.png', '.svg' ]
     },
 
-    devtool: 'eval-source-map',
-
+    devtool:
+        process.env.NODE_ENV === 'production'
+            ? 'hidden-source-map'
+            : 'eval-source-map',
+    devServer: {
+        compress: true,
+        port: 8000,
+        client: {
+            logging: 'info',
+        },
+        historyApiFallback: true,
+    },
     module: {
         rules: [
             {

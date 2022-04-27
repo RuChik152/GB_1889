@@ -2,6 +2,8 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
 }
 
 
@@ -11,7 +13,7 @@ html {
 
 .home {
   width: 80vw;
-  margin: 3vh auto;
+  margin: 0vh 3vh 3vh 3vh;
   background-color: rgba(0, 0, 0, 0.2);
   padding: 17px;
   display: flex;
@@ -19,7 +21,7 @@ html {
 }
 
 .action__block {
-  width: 83%;
+  width: 100%;
 }
 
 body {

@@ -3,26 +3,27 @@ import { Msg } from './Msg/msg';
 import style from './chat.module.scss';
 
 interface Msg {
-    author: string,
-    time: string,
-    msg: string
-}
+    id: string;
+    author: string;
+    time: string;
+    msg: string;
+};
 
 interface ChatProps {
-    message: Msg[];
+    msg: Msg[];
 }
 
-export const Chat: FC<ChatProps> = ({ message }) => {
+export const ChatArea: FC<ChatProps> = ({ msg }) => {
   const reversArr = () => {
-    const arr = [...message];
+    const arr = [...msg];
     return arr.reverse();
   };
 
   return (
     <div className={style.chat} data-testid="chat-test">
       <div className="chat__area">
-        {reversArr().map((item, index) => (
-          <Msg author={item.author} msg={item.msg} time={item.time} key={index} />
+        {reversArr().map((item) => (
+          <Msg author={item.author} msg={item.msg} time={item.time} key={item.id} />
         ))}
       </div>
     </div>

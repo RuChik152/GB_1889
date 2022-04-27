@@ -1,206 +1,88 @@
-import React, { FC, useEffect, useState } from 'react';
-import { Chat } from './Chat/chat';
-import { Input } from './Input/input';
-import { NavChat } from "./NavChat/navChat";
-import style from './main.module.scss';
+import React, { FC, useState} from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Home } from './pages/Home';
+import { Profile } from './pages/Profile';
+import { Header } from './Header';
+import { Chats } from './pages/Chats';
+import { ChatList } from './ChatList/ChatList';
+import { AUTHOR, createCurrentTime } from '../modal/utility';
 
+export interface Chat {
+  id: string;
+  name: string;
+}
 
-interface ReactogramProps {
-  data: string;
+const initialChat: Chat[] = [
+  {
+    id: 'default',
+    name: 'chat'
+  }
+]
+
+const initialMsgs: Msgs = {
+    default: [
+        {
+            id: '1',
+            author: AUTHOR.user,
+            time: createCurrentTime(),
+            msg: 'Hello World'
+        }
+    ]
 }
 
 interface Msg {
+  id: string;
   author: string;
   time: string;
   msg: string;
 };
 
-interface ChatItem {
-  link: string;
-  title: string;
+interface Msgs {
+  [key: string]: Msg[];
 }
 
-export const Reactogram: FC<ReactogramProps> = ({ data }) => {
-  const [text, setText] = useState('');
-  const [time, setTime] = useState('');
-  const [msg, setMsg] = useState<Msg[]>([]);
-  const [chatList, setChatList] = useState<ChatItem[]>([
-    {
-      link: '#',
-      title: 'Канал №1',
-    },
-    {
-      link: '#',
-      title: 'Канал №2',
-    },
-    {
-      link: '#',
-      title: 'Канал №2',
-    },
+export const Reactogram: FC = () => {
+  const [chatlist, setChatlist] = useState<Chat[]>(initialChat);
+  const [msg, setMsg] = useState<Msgs>(initialMsgs);
 
-  ]);
+  const addChatList = (chat: Chat) => {
+      setChatlist([ ...chatlist, chat ]);
+      setMsg({ ...msg, [chat.id]:[]});
 
-  // useEffect(() => {
-  //   setTimeout(bot, 1500);
-  //   //eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
-
-  useEffect(() => {
-    if (msg.length !== 0) {
-      if (msg[msg.length - 1].author !== 'BothFather') {
-        const timeout = setTimeout(bot, 1500);
-        return () => {
-          clearTimeout(timeout);
-        };
-      }
-    }
-    //eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [msg]);
-
-  const handelChange = (e: { target: { id: string; value: React.SetStateAction<string>; }; }) => {
-    if (e.target.id === 'text__input__id') {
-      setText(e.target.value);
-    }
-    setTime(createCurrentTime());
   };
 
-  const actionClick = () => {
-    const obj: { msg: string, author: string, time: string } = { msg: text, author: data, time: time };
-    setMsg([...msg, obj]);
-  };
-
-  const createCurrentTime = () => {
-    const time = new Date();
-    return `${time.getHours()} : ${time.getMinutes()} : ${time.getSeconds()}`;
-  };
-
-  //TODO Переделать логику бота по возвможности в будущем
-  const bot = () => {
-    const lengthMsg = msg.length;
-    if (lengthMsg === 0) {
-      const obj = {
-        msg: 'Привет, это бот психологической помощи Вася Вася. Вы можете использовать кодовые фразы для взаимодействия с ним =>  #Слово #Время #Поиск',
-        author: 'BothFather',
-        time: `${createCurrentTime()}`,
-      };
-      setMsg([...msg, obj]);
-      setTime('');
-      setText('');
+  const removeChatList = (e: { target: { dataset: { id: string | undefined; }; }; }) => {
+        const idxList = chatlist.findIndex( item => item.id == e.target.dataset.id);
+        setChatlist([ ...delList( chatlist, idxList ) ]);
+        setMsg({ ...delMsg( msg, e.target.dataset.id ) });
     }
 
-    if (text === '#Слово') {
-      const obj: Msg = {
-        msg: `<>
-            <li>
-              <a
-                href="https://slovardalja.net/"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Словарь Даля
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://stih.su/pushkin/"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Стихи Пушкина
-              </a>
-            </li>
-          </>`,
-        author: 'BothFather',
-        time: `${createCurrentTime()}`,
-      };
-      setMsg([...msg, obj]);
-      setTime('');
-      setText('');
-    } else if (text === '#Время') {
-      const obj = {
-        msg: `<>
-            <li>
-              <a href="https://time.is/ru/" target="_blank" rel="noreferrer">
-                Time
-              </a>
-            </li>
-            <li>
-              <a href="https://time100.ru/" target="_blank" rel="noreferrer">
-                Time 100
-              </a>
-            </li>
-          </>`,
-        author: 'BothFather',
-        time: `${createCurrentTime()}`,
-      };
-      setMsg([...msg, obj]);
-      setTime('');
-      setText('');
-    } else if (text === '#Поиск') {
-      const obj = {
-        msg: `<>
-            <li>
-              <a href="https://ya.ru/" target="_blank" rel="noreferrer">
-                Time
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://duckduckgo.com/"
-                target="_blank"
-                rel="noreferrer"
-              >
-                DuckDuckGo
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://www.dogpile.com/"
-                target="_blank"
-                rel="noreferrer"
-              >
-                DogPile
-              </a>
-            </li>
-          </>`,
-        author: 'BothFather',
-        time: `${createCurrentTime()}`,
-      };
-      setMsg([...msg, obj]);
-      setTime('');
-      setText('');
-    } else {
-      const name = msg.slice(-1);
-      const msgBot: string[] = [
-        'Сообщение от пользователя',
-        'Message from user(англ.)',
-        'Nachricht vom Benutzer(немц.)',
-        '用戶留言(кит.)',
-      ];
-      const template = '$wel__template$ $nik__name$.';
-      const positionMsgBot = parseInt(String(Math.random() * msgBot.length));
-      let regWel = /\$wel__template\$/gi;
-      let newStr = template.replace(regWel, msgBot[positionMsgBot]);
-      regWel = /\$nik__name\$/gi;
-      newStr = newStr.replace(regWel, name[0].author);
-      const obj = {
-        msg: `${newStr}`,
-        author: 'BothFather',
-        time: `${createCurrentTime()}`,
-      };
-      setMsg([...msg, obj]);
-      setTime('');
-      setText('');
-    }
+  const delList = (arr: Chat[], idx: number) => {
+      const newArr = [...arr];
+      newArr.splice( idx, 1);
+      return newArr;
   };
 
-  return (
-    <div className={style.home} data-testid="home-test-id">
-      <NavChat list={chatList} />
-      <div className={style.action__block}>
-        <Chat message={msg} />
-        <Input click={actionClick} text={text} change={handelChange} />
-      </div>
-    </div>
-  );
+  const delMsg = (obj: {}, idx: string | undefined) => {
+      const arr = {...obj};
+      delete arr[`${idx}`];
+      const arrNew = {...arr}
+      return arrNew
+  }
+
+    return(
+    <BrowserRouter>
+        <Routes>
+            <Route path="/" element={<Header />}>
+                <Route index element={<Home />} />
+                <Route path="profile" element={<Profile />}/>
+                <Route path="chats">
+                    <Route index element={<ChatList chatlist={ chatlist }  addChatList={addChatList} removeChatList={ removeChatList }/>}/>
+                    <Route path=":chaiId" element={<Chats setMsg={setMsg} msg={msg} chatlist={ chatlist }  addChatList={addChatList} removeChatList={removeChatList}/>}/>
+                </Route>
+            </Route>
+            <Route path="*" element={<h2>404</h2>}/>
+        </Routes>
+    </BrowserRouter>
+    )
 };
