@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, Suspense } from 'react';
 import { BrowserRouter, Route, Routes, HashRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
@@ -55,26 +55,26 @@ export const Reactogram: FC = () => {
     setMsg({ ...msg, [chat.id]: [] });
   };
 
-  const removeChatList = (e: { target: { dataset: { id: string } } }) => {
-    setChatlist([...delList(chatlist, e.target.dataset.id)]);
-    setMsg({ ...delMsg(msg, e.target.dataset.id) });
+  const removeChatList = (id: string) => {
+    setChatlist([...delList(chatlist, id)]);
+    setMsg({ ...delMsg(msg, id) });
   };
 
   const delList = (arr: Chat[], idx: string) => {
-    return arr.filter( (elem) => elem.id !== idx);
+    return arr.filter((elem) => elem.id !== idx);
   };
 
   const delMsg = (obj: Msgs, idx: string) => {
     const arr = { ...obj };
     delete arr[idx];
-    const arrNew = { ...arr };
-    return arrNew;
+    return { ...arr };
   };
 
   const toggleTheme = () => {
     setTheme(theme === 'light' ? 'dark' : 'light');
   };
 
+  // @ts-ignore
   return (
     <Provider store={store}>
       <ThemeContext.Provider

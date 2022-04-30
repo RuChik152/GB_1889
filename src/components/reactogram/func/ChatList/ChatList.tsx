@@ -8,7 +8,7 @@ import { Button, Input, TextField } from '@mui/material';
 interface ChatListProps {
   chatlist: Chat[];
   addChatList: (chats: Chat) => void;
-  removeChatList: (e: { target: { dataset: { id: string } } }) => void;
+  removeChatList: (id: string) => void;
 }
 export const ChatList: FC<ChatListProps> = ({
   chatlist,
@@ -16,10 +16,6 @@ export const ChatList: FC<ChatListProps> = ({
   removeChatList,
 }) => {
   const [name, setName] = useState('');
-
-  const action = (e: any) => {
-    removeChatList(e);
-  };
 
   const handelSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -42,7 +38,7 @@ export const ChatList: FC<ChatListProps> = ({
             >
               {chat.name}
             </NavLink>
-            <button data-id={chat.id} onClick={action}>
+            <button onClick={() => removeChatList(chat.id)}>
               X
             </button>
           </li>

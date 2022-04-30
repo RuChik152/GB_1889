@@ -17,5 +17,5 @@ export interface ChatsProps {
     setMsg: React.Dispatch<React.SetStateAction<Msgs>>;
     chatlist: Chat[];
     addChatList: (chats: Chat) => void;
-    removeChatList: (e: { target: { dataset: { id: string } } }) => void;
+    removeChatList: (id: string) => void;
 }
