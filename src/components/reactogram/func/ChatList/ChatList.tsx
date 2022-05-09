@@ -1,8 +1,8 @@
 import React, { FC, useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import style from './chatList.module.scss';
-import { Button, Input, TextField } from '@mui/material';
-import {shallowEqual, useDispatch, useSelector} from 'react-redux';
+import { Button, Input } from '@mui/material';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { addChat, deleteChat } from '../store/chats/action';
 import { selectChatList } from '../store/chats/selectors';
 
