@@ -5,7 +5,7 @@ import { ChatArea } from '../Chat/chatArea';
 import { Input } from '../Input/input';
 import { ChatList } from '../ChatList/ChatList';
 
-import { useDispatch, useSelector } from 'react-redux';
+import {shallowEqual, useDispatch, useSelector} from 'react-redux';
 import { selectChatList, selectChats } from '../store/chats/selectors';
 
 export const Chats: FC = () => {
@@ -13,8 +13,10 @@ export const Chats: FC = () => {
 
   const dispatch = useDispatch();
 
-  const msg = useSelector(selectChats);
-  const chatlist = useSelector(selectChatList);
+  const msg = useSelector(selectChats, shallowEqual);
+  const chatlist = useSelector(selectChatList, shallowEqual);
+
+  //TODO
   // useEffect(() => {
   //   if (
   //     chaiId &&

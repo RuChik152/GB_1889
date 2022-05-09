@@ -2,7 +2,7 @@ import React, { FC, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import style from './chatList.module.scss';
 import { Button, Input, TextField } from '@mui/material';
-import { useDispatch, useSelector } from 'react-redux';
+import {shallowEqual, useDispatch, useSelector} from 'react-redux';
 import { addChat, deleteChat } from '../store/chats/action';
 import { selectChatList } from '../store/chats/selectors';
 
@@ -11,7 +11,7 @@ export const ChatList: FC = () => {
 
   const dispatch = useDispatch();
 
-  const chatlist = useSelector(selectChatList);
+  const chatlist = useSelector(selectChatList, shallowEqual);
 
   const handelSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
