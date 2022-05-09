@@ -1,64 +1,45 @@
-import React, { FC, useCallback, useEffect, useState } from 'react';
+import React, { FC } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
-import { AUTHOR, createCurrentTime } from '../../modal/utility';
-import { nanoid } from 'nanoid';
 import style from '../main.module.scss';
 import { ChatArea } from '../Chat/chatArea';
 import { Input } from '../Input/input';
 import { ChatList } from '../ChatList/ChatList';
-import { ChatsProps } from './typeChats';
 
-export const Chats: FC<ChatsProps> = ({
-  chatlist,
-  addChatList,
-  msg,
-  setMsg,
-  removeChatList,
-}) => {
+import { useDispatch, useSelector } from 'react-redux';
+import { selectChatList, selectChats } from '../store/chats/selectors';
+
+export const Chats: FC = () => {
   const { chaiId } = useParams();
 
-  useEffect(() => {
-    if (
-      chaiId &&
-      msg[chaiId]?.length > 0 &&
-      msg[chaiId][msg[chaiId].length - 1].author !== AUTHOR.bot
-    ) {
-      const timer = setTimeout(() => {
-        setMsg({
-          ...msg,
-          [chaiId]: [
-            ...msg[chaiId],
-            {
-              id: nanoid(),
-              author: AUTHOR.bot,
-              time: createCurrentTime(),
-              msg: `I am ${AUTHOR.bot}`,
-            },
-          ],
-        });
-      }, 1000);
-      return () => {
-        clearTimeout(timer);
-      };
-    }
-  }, [msg]);
+  const dispatch = useDispatch();
 
-  const addMessage = (value: string) => {
-    if (chaiId) {
-      setMsg((prevMessage) => ({
-        ...prevMessage,
-        [chaiId]: [
-          ...prevMessage[chaiId],
-          {
-            id: nanoid(),
-            author: AUTHOR.user,
-            msg: value,
-            time: createCurrentTime(),
-          },
-        ],
-      }));
-    }
-  };
+  const msg = useSelector(selectChats);
+  const chatlist = useSelector(selectChatList);
+  // useEffect(() => {
+  //   if (
+  //     chaiId &&
+  //     msg[chaiId]?.length > 0 &&
+  //     msg[chaiId][msg[chaiId].length - 1].author !== AUTHOR.bot
+  //   ) {
+  //     const timer = setTimeout(() => {
+  //       setMsg({
+  //         ...msg,
+  //         [chaiId]: [
+  //           ...msg[chaiId],
+  //           {
+  //             id: nanoid(),
+  //             author: AUTHOR.bot,
+  //             time: createCurrentTime(),
+  //             msg: `I am ${AUTHOR.bot}`,
+  //           },
+  //         ],
+  //       });
+  //     }, 1000);
+  //     return () => {
+  //       clearTimeout(timer);
+  //     };
+  //   }
+  // }, [msg]);
 
   if (chaiId && !msg[chaiId]) {
     return <Navigate replace to="/chats" />;
@@ -66,15 +47,11 @@ export const Chats: FC<ChatsProps> = ({
 
   return (
     <>
-      <ChatList
-        chatlist={chatlist}
-        addChatList={addChatList}
-        removeChatList={removeChatList}
-      />
+      <ChatList />
       <div className={style.home} data-testid="home-test-id">
         <div className={style.action__block}>
           <ChatArea msg={chaiId ? msg[chaiId] : []} />
-          <Input change={addMessage} />
+          <Input />
         </div>
       </div>
     </>

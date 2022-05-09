@@ -1,5 +1,63 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Chat Snapshot test 1`] = `
+<DocumentFragment>
+  <div
+    class="chat"
+    data-testid="chat-test"
+  >
+    <div
+      class="chat__area"
+    >
+      <div
+        class="msg__item"
+      >
+        <span
+          class="item__author"
+          data-testid="test-author"
+        >
+          admin2
+        </span>
+        <p
+          class="item__text"
+          data-testid="test-text"
+        >
+          Тестовое сообщение!2
+        </p>
+        <p
+          class="item__time"
+          data-testid="test-time"
+        >
+          Время: 10:10:10
+        </p>
+      </div>
+      <div
+        class="msg__item"
+      >
+        <span
+          class="item__author"
+          data-testid="test-author"
+        >
+          admin
+        </span>
+        <p
+          class="item__text"
+          data-testid="test-text"
+        >
+          Тестовое сообщение!
+        </p>
+        <p
+          class="item__time"
+          data-testid="test-time"
+        >
+          Время: 10:10:10
+        </p>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
 exports[`ChatArea Snapshot test 1`] = `
 <DocumentFragment>
   <div

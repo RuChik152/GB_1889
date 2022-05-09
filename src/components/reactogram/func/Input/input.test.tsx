@@ -8,24 +8,23 @@ const user = userEvent.setup();
 
 describe('Input', () => {
   it('Render', () => {
-    render(<Input change={jest.fn()} />);
+    render(<Input />);
   });
 
   it('is there an INPUT and BUTTON', () => {
-    const onSearchMock = jest.fn();
-    render(<Input change={onSearchMock} />);
+    render(<Input />);
     expect(screen.getByPlaceholderText('Ваше сообщение')).toBeInTheDocument();
     expect(screen.getByTestId('test-id')).toBeInTheDocument();
   });
 
   it('input value to string', () => {
-    render(<Input  change={jest.fn()} />);
+    render(<Input />);
     expect(screen.getByPlaceholderText('Ваше сообщение')).toHaveValue('text');
   });
 
   it('button 3 click', async () => {
     const func = jest.fn();
-    render(<Input change={jest.fn()} />);
+    render(<Input />);
     user.tripleClick(screen.getByTestId('test-id'));
     await waitFor(() => expect(func).toHaveBeenCalledTimes(3), {
       timeout: 1100,
@@ -34,7 +33,7 @@ describe('Input', () => {
 
 
   it('Snapshot', () => {
-    const { asFragment } = render(<Input change={jest.fn()} />);
+    const { asFragment } = render(<Input />);
     expect(asFragment()).toMatchSnapshot();
   });
 });
