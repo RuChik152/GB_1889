@@ -6,6 +6,7 @@ import { Home } from './pages/Home';
 import { Profile } from './pages/Profile';
 import { Header } from './Header';
 import { ChatList } from './ChatList/ChatList';
+import { AboutWithConnect } from './pages/About';
 
 const Chats = React.lazy(() =>
   import('./pages/Chats').then((module) => ({
@@ -74,6 +75,7 @@ export const Reactogram: FC = () => {
                   }
                 />
               </Route>
+              <Route path="about" element={<AboutWithConnect />} />
             </Route>
             <Route path="*" element={<h2>404</h2>} />
           </Routes>
