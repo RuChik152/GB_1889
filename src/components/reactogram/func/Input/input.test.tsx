@@ -25,10 +25,8 @@ describe('Input', () => {
   it('button 3 click', async () => {
     const func = jest.fn();
     render(<Input />);
-    user.tripleClick(screen.getByTestId('test-id'));
-    await waitFor(() => expect(func).toHaveBeenCalledTimes(3), {
-      timeout: 1100,
-    });
+    await user.tripleClick(screen.getByTestId('test-id'));
+    await expect(func).toHaveBeenCalledTimes(3)
   });
 
 

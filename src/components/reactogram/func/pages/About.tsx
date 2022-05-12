@@ -10,13 +10,12 @@ interface AboutProps {
   toggle: () => void;
 }
 
-export const About: FC<AboutProps> = (props) => {
-  console.log(props);
+export const About: FC<AboutProps> = ({ visible, toggle }) => {
   return (
     <>
       <h2>About</h2>
-      <input type="checkbox" checked={props.visible} />
-      <Button onClick={() => props.toggle()} variant="contained">
+      <input type="checkbox" checked={visible} />
+      <Button onClick={() => toggle()} variant="contained">
         VISIBLE
       </Button>
     </>

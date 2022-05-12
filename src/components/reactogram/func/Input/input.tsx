@@ -1,4 +1,4 @@
-import React, { FC, SetStateAction, useState } from 'react';
+import React, { FC, FormEvent, SetStateAction, useState} from 'react';
 import style from './input.module.scss';
 import { Button as ButtonUI, Input as InputUI } from '@mui/material';
 import { useDispatch } from 'react-redux';
@@ -10,7 +10,7 @@ export const Input: FC = () => {
   const { chaiId } = useParams();
   const dispatch = useDispatch();
 
-  const actionForm = (e: { preventDefault: () => void }) => {
+  const actionForm = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (chaiId) {
       dispatch(addMsg(chaiId, value));
@@ -29,12 +29,11 @@ export const Input: FC = () => {
         />
         <br />
         <ButtonUI
-          onClick={actionForm}
           disabled={!value}
           data-testid="test-id"
           variant="contained"
         >
-          Отправить
+          Нажмите Enter
         </ButtonUI>
       </form>
     </div>
