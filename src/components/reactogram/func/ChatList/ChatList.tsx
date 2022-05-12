@@ -1,26 +1,23 @@
 import React, { FC, useState } from 'react';
-import { Chat } from '../main';
-import { Link, NavLink } from 'react-router-dom';
-import { nanoid } from 'nanoid';
+import { NavLink } from 'react-router-dom';
 import style from './chatList.module.scss';
-import { Button, Input, TextField } from '@mui/material';
+import { Button, Input } from '@mui/material';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { addChat, deleteChat } from '../store/chats/action';
+import { selectChatList } from '../store/chats/selectors';
 
-interface ChatListProps {
-  chatlist: Chat[];
-  addChatList: (chats: Chat) => void;
-  removeChatList: (id: string) => void;
-}
-export const ChatList: FC<ChatListProps> = ({
-  chatlist,
-  addChatList,
-  removeChatList,
-}) => {
+export const ChatList: FC = () => {
   const [name, setName] = useState('');
+
+  const dispatch = useDispatch();
+
+  const chatlist = useSelector(selectChatList, shallowEqual);
 
   const handelSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     if (name) {
-      addChatList({ id: nanoid(), name });
+      dispatch(addChat(name));
       setName('');
     }
   };
@@ -31,16 +28,14 @@ export const ChatList: FC<ChatListProps> = ({
         {chatlist.map((chat) => (
           <li key={chat.id}>
             <NavLink
-              to={`/chats/${chat.id}`}
+              to={`/chats/${chat.name}`}
               style={({ isActive }) => ({
                 color: isActive ? '#cbcbcb' : '#000000',
               })}
             >
               {chat.name}
             </NavLink>
-            <button onClick={() => removeChatList(chat.id)}>
-              X
-            </button>
+            <button onClick={() => dispatch(deleteChat(chat.name))}>X</button>
           </li>
         ))}
       </ul>

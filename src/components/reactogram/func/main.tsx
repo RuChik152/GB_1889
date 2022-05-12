@@ -1,15 +1,18 @@
 import React, { FC, useState, Suspense } from 'react';
 import { BrowserRouter, Route, Routes, HashRouter } from 'react-router-dom';
-import { Provider } from 'react-redux';
 
 import { defaultContext, ThemeContext } from '../modal/ThemeContext';
 import { Home } from './pages/Home';
 import { Profile } from './pages/Profile';
 import { Header } from './Header';
-import { Chats } from './pages/Chats';
 import { ChatList } from './ChatList/ChatList';
-import { AUTHOR, createCurrentTime } from '../modal/utility';
-import { store } from './store';
+import { AboutWithConnect } from './pages/About';
+
+const Chats = React.lazy(() =>
+  import('./pages/Chats').then((module) => ({
+    default: module.Chats,
+  }))
+);
 
 export interface Chat {
   id: string;
@@ -24,14 +27,7 @@ const initialChat: Chat[] = [
 ];
 
 const initialMsgs: Msgs = {
-  default: [
-    {
-      id: '1',
-      author: AUTHOR.user,
-      time: createCurrentTime(),
-      msg: 'Hello World',
-    },
-  ],
+  default: [],
 };
 
 interface Msg {
@@ -46,43 +42,20 @@ interface Msgs {
 }
 
 export const Reactogram: FC = () => {
-  const [chatlist, setChatlist] = useState<Chat[]>(initialChat);
-  const [msg, setMsg] = useState<Msgs>(initialMsgs);
   const [theme, setTheme] = useState(defaultContext.theme);
-
-  const addChatList = (chat: Chat) => {
-    setChatlist([...chatlist, chat]);
-    setMsg({ ...msg, [chat.id]: [] });
-  };
-
-  const removeChatList = (id: string) => {
-    setChatlist([...delList(chatlist, id)]);
-    setMsg({ ...delMsg(msg, id) });
-  };
-
-  const delList = (arr: Chat[], idx: string) => {
-    return arr.filter((elem) => elem.id !== idx);
-  };
-
-  const delMsg = (obj: Msgs, idx: string) => {
-    const arr = { ...obj };
-    delete arr[idx];
-    return { ...arr };
-  };
 
   const toggleTheme = () => {
     setTheme(theme === 'light' ? 'dark' : 'light');
   };
 
-  // @ts-ignore
   return (
-    <Provider store={store}>
-      <ThemeContext.Provider
-        value={{
-          theme,
-          toggleTheme,
-        }}
-      >
+    <ThemeContext.Provider
+      value={{
+        theme,
+        toggleTheme,
+      }}
+    >
+      <Suspense fallback={<div>Loading...</div>}>
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Header />}>
@@ -92,31 +65,22 @@ export const Reactogram: FC = () => {
                 <Route
                   index
                   element={
-                    <ChatList
-                      chatlist={chatlist}
-                      addChatList={addChatList}
-                      removeChatList={removeChatList}
-                    />
+                    <ChatList />
                   }
                 />
                 <Route
                   path=":chaiId"
                   element={
-                    <Chats
-                      setMsg={setMsg}
-                      msg={msg}
-                      chatlist={chatlist}
-                      addChatList={addChatList}
-                      removeChatList={removeChatList}
-                    />
+                    <Chats />
                   }
                 />
               </Route>
+              <Route path="about" element={<AboutWithConnect />} />
             </Route>
             <Route path="*" element={<h2>404</h2>} />
           </Routes>
         </BrowserRouter>
-      </ThemeContext.Provider>
-    </Provider>
+      </Suspense>
+    </ThemeContext.Provider>
   );
 };

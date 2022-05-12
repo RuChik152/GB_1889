@@ -1,19 +1,16 @@
-import React, { FC, useContext, useState } from 'react';
+import React, { FC, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
-import { ThemeContext } from '../../modal/ThemeContext';
 import { changeName, toggleProfile } from '../store/profile/actions';
-
-import { ProfileState } from '../store/profile/reducer';
 import style from './profiles.module.scss';
 import { Button } from '@mui/material';
+import { selectName, selectVisible } from '../store/profile/selectors';
 
 export const Profile: FC = () => {
   const dispatch = useDispatch();
   const [value, setValue] = useState('');
 
-  const visible = useSelector((state: ProfileState) => state.visible);
-  const name = useSelector((state: ProfileState) => state.name);
+  const visible = useSelector(selectVisible);
+  const name = useSelector(selectName);
 
   return (
     <div className={style.profile}>
