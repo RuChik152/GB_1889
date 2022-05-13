@@ -2,18 +2,7 @@ import React, { FC, useState, Suspense } from 'react';
 import { BrowserRouter, Route, Routes, HashRouter } from 'react-router-dom';
 
 import { defaultContext, ThemeContext } from '../modal/ThemeContext';
-import { Home } from './pages/Home';
-import { Profile } from './pages/Profile';
-import { Header } from './Header';
-import { ChatList } from './ChatList/ChatList';
-import { AboutWithConnect } from './pages/About';
 import {AppRouter} from "../../AppRouter";
-
-// const Chats = React.lazy(() =>
-//   import('./pages/Chats').then((module) => ({
-//     default: module.Chats,
-//   }))
-// );
 
 export interface Chat {
   id: string;
