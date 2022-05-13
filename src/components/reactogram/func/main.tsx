@@ -7,12 +7,13 @@ import { Profile } from './pages/Profile';
 import { Header } from './Header';
 import { ChatList } from './ChatList/ChatList';
 import { AboutWithConnect } from './pages/About';
+import {AppRouter} from "../../AppRouter";
 
-const Chats = React.lazy(() =>
-  import('./pages/Chats').then((module) => ({
-    default: module.Chats,
-  }))
-);
+// const Chats = React.lazy(() =>
+//   import('./pages/Chats').then((module) => ({
+//     default: module.Chats,
+//   }))
+// );
 
 export interface Chat {
   id: string;
@@ -55,32 +56,7 @@ export const Reactogram: FC = () => {
         toggleTheme,
       }}
     >
-      <Suspense fallback={<div>Loading...</div>}>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Header />}>
-              <Route index element={<Home />} />
-              <Route path="profile" element={<Profile />} />
-              <Route path="chats">
-                <Route
-                  index
-                  element={
-                    <ChatList />
-                  }
-                />
-                <Route
-                  path=":chaiId"
-                  element={
-                    <Chats />
-                  }
-                />
-              </Route>
-              <Route path="about" element={<AboutWithConnect />} />
-            </Route>
-            <Route path="*" element={<h2>404</h2>} />
-          </Routes>
-        </BrowserRouter>
-      </Suspense>
+      <AppRouter />
     </ThemeContext.Provider>
   );
 };

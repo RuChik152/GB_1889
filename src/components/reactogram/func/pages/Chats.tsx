@@ -5,7 +5,7 @@ import { ChatArea } from '../Chat/chatArea';
 import { Input } from '../Input/input';
 import { ChatList } from '../ChatList/ChatList';
 
-import {shallowEqual, useDispatch, useSelector} from 'react-redux';
+import { shallowEqual, useDispatch, useSelector} from 'react-redux';
 import { selectChatList, selectChats } from '../store/chats/selectors';
 
 export const Chats: FC = () => {

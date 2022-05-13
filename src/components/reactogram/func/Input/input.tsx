@@ -1,9 +1,10 @@
-import React, { FC, FormEvent, SetStateAction, useState} from 'react';
+import React, { FC, FormEvent, SetStateAction, useState } from 'react';
 import style from './input.module.scss';
 import { Button as ButtonUI, Input as InputUI } from '@mui/material';
 import { useDispatch } from 'react-redux';
-import { addMsg } from '../store/chats/action';
+import { addMessageWithReply, addMsg} from '../store/chats/action';
 import { useParams } from 'react-router-dom';
+import { AUTHOR } from '../../modal/utility';
 
 export const Input: FC = () => {
   const [value, setValue] = useState('');
@@ -12,8 +13,11 @@ export const Input: FC = () => {
 
   const actionForm = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (chaiId) {
-      dispatch(addMsg(chaiId, value));
+    if (chaiId && value) {
+      //TODO
+      dispatch(
+        addMessageWithReply(chaiId, { msg: value, author: AUTHOR.user })
+      );
     }
     setValue('');
   };
@@ -28,11 +32,7 @@ export const Input: FC = () => {
           placeholder="Ваше сообщение"
         />
         <br />
-        <ButtonUI
-          disabled={!value}
-          data-testid="test-id"
-          variant="contained"
-        >
+        <ButtonUI disabled={!value} data-testid="test-id" variant="contained">
           Нажмите Enter
         </ButtonUI>
       </form>
