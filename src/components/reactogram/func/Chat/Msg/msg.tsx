@@ -2,10 +2,10 @@ import React, { FC } from 'react';
 import style from './msg.module.scss';
 
 interface MsgProps {
-  key: string;
+  key?: string;
   author: string;
   msg: string;
-  time: string;
+  time?: string;
 }
 
 export const Msg: FC<MsgProps> = ({ author, msg, time }) => {

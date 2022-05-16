@@ -5,16 +5,12 @@ import { ChatArea } from '../Chat/chatArea';
 import { Input } from '../Input/input';
 import { ChatList } from '../ChatList/ChatList';
 
-import { shallowEqual, useDispatch, useSelector} from 'react-redux';
-import { selectChatList, selectChats } from '../store/chats/selectors';
+import { shallowEqual, useSelector } from 'react-redux';
+import { selectChats } from '../store/chats/selectors';
 
 export const Chats: FC = () => {
   const { chatId } = useParams();
-
-  const dispatch = useDispatch();
-
   const msg = useSelector(selectChats, shallowEqual);
-  const chatlist = useSelector(selectChatList, shallowEqual);
 
   if (chatId && !msg[chatId]) {
     return <Navigate replace to="/chats" />;

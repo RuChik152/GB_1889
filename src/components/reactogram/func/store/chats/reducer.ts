@@ -1,11 +1,11 @@
 import { ADD_CHAT, DELETE_CHAT, ADD_MSG } from './action';
 import { Reducer } from 'redux';
-import { ChatsActions, Msg, MsgState} from './types';
+import { ChatsActions, Msg } from './types';
 import { nanoid } from 'nanoid';
 import { AUTHOR, createCurrentTime } from '../../../modal/utility';
 
 export interface ChatsState {
-  [key: string]: MsgState[];
+  [key: string]: Msg[];
 }
 
 const initialState: ChatsState = {

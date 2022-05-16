@@ -10,15 +10,16 @@ export type Msg = {
   msg: string;
   author: string;
   time?: string;
+  id?: string;
 };
 
 export type MsgUser = Msg & {
   chatId: string;
 };
 
-export type MsgState = Msg & {
-  id: string;
-};
+// export type MsgState = Msg & {
+//   id: string;
+// };
 
 export type AddChat = (chatName: string) => {
   type: typeof ADD_CHAT;

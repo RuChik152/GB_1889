@@ -3,8 +3,7 @@ import { NavLink } from 'react-router-dom';
 import style from './chatList.module.scss';
 import { Button, Input } from '@mui/material';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-//import { addChat, deleteChat } from '../store/chats/action';
-import { addChat, deleteChat} from '../store/chats/slice'
+import { addChat, deleteChat } from '../store/chats/slice';
 import { selectChatList } from '../store/chats/selectors';
 
 export const ChatList: FC = () => {
@@ -18,7 +17,7 @@ export const ChatList: FC = () => {
     e.preventDefault();
 
     if (name) {
-      dispatch(addChat({name}));
+      dispatch(addChat({ name }));
       setName('');
     }
   };

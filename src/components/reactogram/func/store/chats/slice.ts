@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
-import { Msg, MsgState } from './types';
+import { Msg } from './types';
 import { AUTHOR, createCurrentTime } from '../../../modal/utility';
 import { nanoid } from 'nanoid';
 
 export interface ChatState {
-  [key: string]: MsgState[];
+  [key: string]: Msg[];
 }
 
 const initialState: ChatState = {
