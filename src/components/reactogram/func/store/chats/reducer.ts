@@ -4,13 +4,6 @@ import { ChatsActions, Msg, MsgState} from './types';
 import { nanoid } from 'nanoid';
 import { AUTHOR, createCurrentTime } from '../../../modal/utility';
 
-// interface Msg {
-//   id: string;
-//   author: string;
-//   time: string;
-//   msg: string;
-// }
-
 export interface ChatsState {
   [key: string]: MsgState[];
 }

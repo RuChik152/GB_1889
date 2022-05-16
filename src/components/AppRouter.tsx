@@ -1,9 +1,10 @@
 import React, { FC, Suspense } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, HashRouter } from 'react-router-dom';
 
 import { Header } from './reactogram/func/Header';
 import { Home } from './reactogram/func/pages/Home';
 import { Profile } from './reactogram/func/pages/Profile';
+//import { Chats } from './reactogram/func/pages/Chats';
 import { ChatList } from './reactogram/func/ChatList/ChatList';
 import { AboutWithConnect } from './reactogram/func/pages/About';
 
@@ -22,7 +23,7 @@ export const AppRouter: FC = () => (
           <Route path="profile" element={<Profile />} />
           <Route path="chats">
             <Route index element={<ChatList />} />
-            <Route path=":chaiId" element={<Chats />} />
+            <Route path=":chatId" element={<Chats />} />
           </Route>
           <Route path="about" element={<AboutWithConnect />} />
         </Route>

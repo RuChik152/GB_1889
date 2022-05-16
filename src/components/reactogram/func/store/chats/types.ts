@@ -9,7 +9,7 @@ export type ChatsActions =
 export type Msg = {
   msg: string;
   author: string;
-  time: string;
+  time?: string;
 };
 
 export type MsgUser = Msg & {
