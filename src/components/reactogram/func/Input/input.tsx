@@ -1,19 +1,26 @@
-import React, { FC, FormEvent, SetStateAction, useState} from 'react';
+import React, { FC, FormEvent, SetStateAction, useState } from 'react';
 import style from './input.module.scss';
 import { Button as ButtonUI, Input as InputUI } from '@mui/material';
 import { useDispatch } from 'react-redux';
-import { addMsg } from '../store/chats/action';
+import { addMsg, addMsgFromBot } from '../store/chats/slice';
 import { useParams } from 'react-router-dom';
+import { AUTHOR } from '../../modal/utility';
+import { ThunkDispatch } from 'redux-thunk';
+import { ChatsState } from '../store/chats/reducer';
+import { AddMsg } from '../store/chats/types';
 
 export const Input: FC = () => {
   const [value, setValue] = useState('');
-  const { chaiId } = useParams();
-  const dispatch = useDispatch();
+  const { chatId } = useParams();
+  const dispatch =
+    useDispatch<ThunkDispatch<ChatsState, void, ReturnType<AddMsg>>>();
 
   const actionForm = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (chaiId) {
-      dispatch(addMsg(chaiId, value));
+    if (chatId && value) {
+      dispatch(
+        addMsgFromBot({ chatId, msg: { msg: value, author: AUTHOR.user } })
+      );
     }
     setValue('');
   };
@@ -28,11 +35,7 @@ export const Input: FC = () => {
           placeholder="Ваше сообщение"
         />
         <br />
-        <ButtonUI
-          disabled={!value}
-          data-testid="test-id"
-          variant="contained"
-        >
+        <ButtonUI disabled={!value} data-testid="test-id" variant="contained">
           Нажмите Enter
         </ButtonUI>
       </form>

@@ -1,16 +1,23 @@
 import React, { FC } from 'react';
-import { Msg } from './Msg/msg';
 import style from './chat.module.scss';
+import { Msg } from './Msg/msg';
+// import { Msg } from './types';
+// interface Message {
+//   id: string;
+//   author: string;
+//   time: string;
+//   msg: string;
+// }
 
-interface Msg {
-  id: string;
-  author: string;
-  time: string;
+type Msge = {
   msg: string;
-}
+  author: string;
+  time?: string;
+  id?: string;
+};
 
 interface ChatProps {
-  msg: Msg[];
+  msg: Msge[];
 }
 
 export const ChatArea: FC<ChatProps> = ({ msg }) => {

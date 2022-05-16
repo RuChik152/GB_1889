@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Button } from '@mui/material';
 import { StoreState } from '../store';
 import { Dispatch } from 'redux';
-import { toggleProfile } from '../store/profile/actions';
+import { toggleProfile } from '../store/profile/slice';
 
 interface AboutProps {
   visible: boolean;
