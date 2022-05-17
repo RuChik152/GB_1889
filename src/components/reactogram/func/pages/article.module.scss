@@ -1,0 +1,22 @@
+.articles {
+  display: flex;
+  width: 80vw;
+  margin: 0 auto;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.img {
+  width: 100%;
+}
+
+.item {
+  width: 28%;
+  margin-top: 30px;
+  margin-bottom: 15px;
+}
+
+.error {
+  color: red;
+}
