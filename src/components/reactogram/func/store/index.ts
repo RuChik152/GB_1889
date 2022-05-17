@@ -24,7 +24,7 @@ export interface StoreState {
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['profile'],
+  blacklist: [],
 };
 
 const rootReducer = combineReducers<StoreState>({

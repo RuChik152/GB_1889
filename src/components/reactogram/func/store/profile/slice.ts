@@ -4,6 +4,7 @@ import { ProfileState } from './reducer';
 const initialState: ProfileState = {
   visible: true,
   name: 'default name',
+  auth: false,
 };
 
 const profileSlice = createSlice({
@@ -16,8 +17,11 @@ const profileSlice = createSlice({
     changeName: (state, action: PayloadAction<string>) => {
       state.name = action.payload;
     },
+    changeAuth: (state, action: PayloadAction<boolean>) => {
+      state.auth = action.payload;
+    },
   },
 });
 
-export const { toggleProfile, changeName } = profileSlice.actions;
+export const { toggleProfile, changeName, changeAuth } = profileSlice.actions;
 export const profileReducer = profileSlice.reducer;

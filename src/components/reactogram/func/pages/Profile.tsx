@@ -20,7 +20,7 @@ export const Profile: FC = () => {
       <br />
       <div>
         <p>Оциональный пункт меню</p>
-        <input type="checkbox" checked={visible} />
+        <input type="checkbox" readOnly checked={visible} />
         <Button onClick={() => dispatch(toggleProfile())} variant="contained">
           VISIBLE
         </Button>
