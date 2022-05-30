@@ -6,7 +6,7 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { addChat, deleteChat } from '../store/chats/slice';
 import { selectChatList } from '../store/chats/selectors';
 import { onValue, remove, set, push } from 'firebase/database';
-import { chatsRef, getByChatsId } from '../../../../services/firebase';
+import { chatsRef, destroyChats, getByChatsId } from '../../../../services/firebase';
 import { nanoid } from 'nanoid';
 
 type Chats = {
@@ -66,10 +66,14 @@ export const ChatList: FC = () => {
     }
   };
 
-  const handelDeleteChat = (name: string) => {
+  const handelDeleteChat = (id: string) => {
     //() => dispatch(deleteChat({ chatId: chat.name}))
-    remove(getByChatsId(name))
+    remove(getByChatsId(id))
     //console.log(getByChatsId(name));
+  }
+  //TODO test
+  const destroyChatLIst = (e: any) => {
+      remove(destroyChats());
   }
   
 
@@ -86,10 +90,11 @@ export const ChatList: FC = () => {
             >
               {chat.name}
             </NavLink>
-            <button onClick={() =>handelDeleteChat(chat.name)}>X</button>
+            <button onClick={() =>handelDeleteChat(chat.id)}>X</button>
           </li>
         ))}
       </ul>
+      <button onClick={destroyChatLIst}>DESTROY CHATS</button>
       <form className={style.form} onSubmit={handelSubmit}>
         <Input
           type="text"

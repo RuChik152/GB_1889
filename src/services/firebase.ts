@@ -37,3 +37,4 @@ export const useRef = ref(database, 'user');
 export const chatsRef = ref(database, 'chats');
 
 export const getByChatsId = (name: string) => ref(database, `chats/${name}`);
+export const destroyChats = () => ref(database, `chats`);
