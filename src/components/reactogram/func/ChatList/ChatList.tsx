@@ -6,14 +6,18 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { addChat, deleteChat } from '../store/chats/slice';
 import { selectChatList } from '../store/chats/selectors';
 import { onValue, remove, set, push } from 'firebase/database';
-import { chatsRef, destroyChats, getByChatsId } from '../../../../services/firebase';
+import {
+  chatsRef,
+  destroyChats,
+  getByChatsId,
+} from '../../../../services/firebase';
 import { nanoid } from 'nanoid';
 
 type Chats = {
   id: string;
   name: string;
   msg: Msg[];
-}
+};
 
 type Msg = {
   msg: string;
@@ -23,31 +27,35 @@ type Msg = {
 };
 
 interface ChatListProps {
-  chats: Chats[]
+  chats: Chats[];
 }
 
 export const ChatList: FC = () => {
   const [name, setName] = useState('');
   const [chats, setChats] = useState<Chats[]>([]);
+
   // useEffect(() => {
-  //   console.log('chats',chats);
-  // }, [])
-  
+  //   console.log(chats);
+  //   console.log(chats);
+  // },[])
+  // //const [chats, setChats] = useState<Chats[]>([]);
+  // // useEffect(() => {
+  // //   console.log('chats',chats);
+  // // }, [])
+
   // const dispatch = useDispatch();
 
   // const chatlist = useSelector(selectChatList, shallowEqual);
 
-  useEffect(()=> {
-    const newChats: Chats[] = [];
+  useEffect(() => {
     onValue(chatsRef, (chatsSnap) => {
+      const newChats: Chats[] = [];
       chatsSnap.forEach((snapshot) => {
-        console.log('snapshot',snapshot.val());
         newChats.push(snapshot.val());
-      })
+      });
       setChats(newChats);
-      setName('');
-    })
-  }, [])
+    });
+  }, []);
 
   const handelSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -55,12 +63,9 @@ export const ChatList: FC = () => {
     if (name) {
       //dispatch(addChat({ name }));
       const id = nanoid();
-      push(chatsRef, {
-        name,
+      set(getByChatsId(id), {
         id,
-        msg: {
-          empty: true,
-        },
+        name,
       });
       setName('');
     }
@@ -68,14 +73,13 @@ export const ChatList: FC = () => {
 
   const handelDeleteChat = (id: string) => {
     //() => dispatch(deleteChat({ chatId: chat.name}))
-    remove(getByChatsId(id))
-    //console.log(getByChatsId(name));
-  }
+    remove(getByChatsId(id));
+
+  };
   //TODO test
-  const destroyChatLIst = (e: any) => {
-      remove(destroyChats());
-  }
-  
+  const destroyChatLIst = () => {
+    remove(destroyChats());
+  };
 
   return (
     <div className={style.chat}>
@@ -83,14 +87,14 @@ export const ChatList: FC = () => {
         {chats.map((chat) => (
           <li key={chat.id}>
             <NavLink
-              to={`/chats/${chat.name}`}
+              to={`/chats/${chat.id}`}
               style={({ isActive }) => ({
                 color: isActive ? '#cbcbcb' : '#000000',
               })}
             >
               {chat.name}
             </NavLink>
-            <button onClick={() =>handelDeleteChat(chat.id)}>X</button>
+            <button onClick={() => handelDeleteChat(chat.id)}>X</button>
           </li>
         ))}
       </ul>

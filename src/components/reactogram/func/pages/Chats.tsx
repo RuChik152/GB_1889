@@ -11,9 +11,10 @@ import { onValue } from 'firebase/database';
 import { chatsRef } from '../../../../services/firebase';
 
 type Chats = {
+  id: string;
   name: string;
   msg: Msg[];
-}
+};
 
 type Msg = {
   msg: string;
@@ -22,27 +23,41 @@ type Msg = {
   id?: string;
 };
 
-export const Chats: FC = () => {
-  const { chatId } = useParams();
-  const msg = useSelector(selectChats, shallowEqual);
-  
-  // console.log('chats', chats);
-  // useEffect(()=> {
-  //   onValue(chatsRef, (chatsSnap) => {
-  //     setChats(chatsSnap.val());
-  //   })
-  // }, [])
+interface ChatsProps {
+  messages: any;
+}
 
-  if (chatId && !msg[chatId]) {
+export const Chats: FC<ChatsProps> = ({ messages }) => {
+  const { chatId } = useParams();
+  // const msg = useSelector(selectChats, shallowEqual);
+
+  //const [messages, setMessages] = useState({});
+
+  // useEffect(() => {
+  //   onValue(chatsRef, (snapshot) => {
+  //     //console.log('messages', snapshot.val());
+  //     setMessages(snapshot.val());
+  //   });
+  // }, []);
+
+  // if (chatId && !messages[chatId]) {
+  //   return <Navigate replace to="/chats" />;
+  // }
+
+  //console.log('chatId', chatId)
+  // console.log('messages', messages)
+  // console.log('messages[chatId]', messages[chatId])
+
+  if (chatId && !messages[chatId]) {
     return <Navigate replace to="/chats" />;
   }
 
   return (
     <>
-      <ChatList  />
+      <ChatList />
       <div className={style.home} data-testid="home-test-id">
         <div className={style.action__block}>
-          <ChatArea msg={chatId ? msg[chatId] : []} />
+          <ChatArea msg={chatId ? messages[chatId] : []} />
           <Input />
         </div>
       </div>

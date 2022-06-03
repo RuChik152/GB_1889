@@ -33,8 +33,9 @@ const database = getDatabase(firebase);
 
 
 export const useRef = ref(database, 'user');
-
 export const chatsRef = ref(database, 'chats');
 
-export const getByChatsId = (name: string) => ref(database, `chats/${name}`);
+export const getByChatsId = (id: string) => ref(database, `chats/${id}`);
+export const getMsgListId = (id: string, msgId: string) => ref(database, `chats/${id}/messageList/${msgId}`);
+
 export const destroyChats = () => ref(database, `chats`);
