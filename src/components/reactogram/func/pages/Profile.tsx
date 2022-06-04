@@ -1,9 +1,11 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeName, toggleProfile } from '../store/profile/slice';
 import style from './profiles.module.scss';
 import { Button } from '@mui/material';
 import { selectName, selectVisible } from '../store/profile/selectors';
+import { onValue, set, update } from 'firebase/database';
+import { useRef } from '../../../../services/firebase';
 
 export const Profile: FC = () => {
   const dispatch = useDispatch();
@@ -11,6 +13,20 @@ export const Profile: FC = () => {
 
   const visible = useSelector(selectVisible);
   const name = useSelector(selectName);
+    onValue(useRef, (snapshot) => {
+      const user = snapshot.val();
+      dispatch(changeName(user.name || ''))
+    });
+  useEffect(() => {
+
+  }, []);
+
+  const handelChangeName = async () => {
+    update(useRef, {
+      name: value,
+    })
+    setValue('');
+  };
 
   return (
     <div className={style.profile}>
@@ -35,7 +51,7 @@ export const Profile: FC = () => {
             placeholder={'Ваше имя'}
           />
           <Button
-            onClick={() => dispatch(changeName(value))}
+            onClick={handelChangeName}
             variant="contained"
           >
             CLICK

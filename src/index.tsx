@@ -9,11 +9,9 @@ const container = document.getElementById('root') as HTMLElement;
 const root = ReactDOMClient.createRoot(container);
 
 root.render(
-  <React.StrictMode>
     <Provider store={store}>
       <PersistGate persistor={persistor}>
         <App />
       </PersistGate>
     </Provider>
-  </React.StrictMode>
 );
