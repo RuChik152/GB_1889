@@ -41,7 +41,6 @@ export const AppRouter: FC = () => {
 
   useEffect(() => {
     const unsubscribe = onValue(chatsRef, (msgSnapshot) => {
-      //console.log('messages', snapshot.val());
       const newMsgs: any = {};
 
       msgSnapshot.forEach((snapshot) => {

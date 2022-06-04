@@ -1,13 +1,6 @@
 import React, { FC } from 'react';
 import style from './chat.module.scss';
 import { Msg } from './Msg/msg';
-// import { Msg } from './types';
-// interface Message {
-//   id: string;
-//   author: string;
-//   time: string;
-//   msg: string;
-// }
 
 type Msge = {
   msg: string;

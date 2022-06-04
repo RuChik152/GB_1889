@@ -6,7 +6,7 @@ import {
   signOut,
 } from 'firebase/auth';
 
-import { getDatabase, ref } from 'firebase/database'
+import { getDatabase, ref } from 'firebase/database';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDytVRTwBKuKa00Z-RvA7_5MR9trfRhXN8',
@@ -31,11 +31,11 @@ export const logOut = async () => await signOut(auth);
 
 const database = getDatabase(firebase);
 
-
 export const useRef = ref(database, 'user');
 export const chatsRef = ref(database, 'chats');
 
 export const getByChatsId = (id: string) => ref(database, `chats/${id}`);
-export const getMsgListId = (id: string, msgId: string) => ref(database, `chats/${id}/messageList/${msgId}`);
+export const getMsgListId = (id: string, msgId: string) =>
+  ref(database, `chats/${id}/messageList/${msgId}`);
 
-export const destroyChats = () => ref(database, `chats`);
+export const destroyChats = () => ref(database, 'chats');

@@ -15,15 +15,10 @@ import {nanoid} from "nanoid";
 export const Input: FC = () => {
   const [value, setValue] = useState('');
   const { chatId } = useParams();
-  const dispatch =
-    useDispatch<ThunkDispatch<ChatsState, void, ReturnType<AddMsg>>>();
 
   const actionForm = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (chatId && value) {
-      // dispatch(
-      //   addMsgFromBot({ chatId, msg: { msg: value, author: AUTHOR.user } })
-      // );
       const id = nanoid();
       set(getMsgListId(chatId, id), {
         chatId,

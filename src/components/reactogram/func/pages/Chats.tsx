@@ -5,11 +5,6 @@ import { ChatArea } from '../Chat/chatArea';
 import { Input } from '../Input/input';
 import { ChatList } from '../ChatList/ChatList';
 
-import { shallowEqual, useSelector } from 'react-redux';
-import { selectChats } from '../store/chats/selectors';
-import { onValue } from 'firebase/database';
-import { chatsRef } from '../../../../services/firebase';
-
 type Chats = {
   id: string;
   name: string;
@@ -29,24 +24,6 @@ interface ChatsProps {
 
 export const Chats: FC<ChatsProps> = ({ messages }) => {
   const { chatId } = useParams();
-  // const msg = useSelector(selectChats, shallowEqual);
-
-  //const [messages, setMessages] = useState({});
-
-  // useEffect(() => {
-  //   onValue(chatsRef, (snapshot) => {
-  //     //console.log('messages', snapshot.val());
-  //     setMessages(snapshot.val());
-  //   });
-  // }, []);
-
-  // if (chatId && !messages[chatId]) {
-  //   return <Navigate replace to="/chats" />;
-  // }
-
-  //console.log('chatId', chatId)
-  // console.log('messages', messages)
-  // console.log('messages[chatId]', messages[chatId])
 
   if (chatId && !messages[chatId]) {
     return <Navigate replace to="/chats" />;

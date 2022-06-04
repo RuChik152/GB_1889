@@ -26,26 +26,10 @@ type Msg = {
   id?: string;
 };
 
-interface ChatListProps {
-  chats: Chats[];
-}
 
 export const ChatList: FC = () => {
   const [name, setName] = useState('');
   const [chats, setChats] = useState<Chats[]>([]);
-
-  // useEffect(() => {
-  //   console.log(chats);
-  //   console.log(chats);
-  // },[])
-  // //const [chats, setChats] = useState<Chats[]>([]);
-  // // useEffect(() => {
-  // //   console.log('chats',chats);
-  // // }, [])
-
-  // const dispatch = useDispatch();
-
-  // const chatlist = useSelector(selectChatList, shallowEqual);
 
   useEffect(() => {
     onValue(chatsRef, (chatsSnap) => {
@@ -61,7 +45,6 @@ export const ChatList: FC = () => {
     e.preventDefault();
 
     if (name) {
-      //dispatch(addChat({ name }));
       const id = nanoid();
       set(getByChatsId(id), {
         id,
@@ -72,7 +55,7 @@ export const ChatList: FC = () => {
   };
 
   const handelDeleteChat = (id: string) => {
-    //() => dispatch(deleteChat({ chatId: chat.name}))
+
     remove(getByChatsId(id));
 
   };
